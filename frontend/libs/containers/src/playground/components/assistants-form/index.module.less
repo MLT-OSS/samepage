@@ -1,0 +1,104 @@
+.assistants-form {
+    height: 85vh;
+    background: #F0F2F5;
+
+    :global {
+        .ant-upload-list-text {
+            width: -webkit-fill-available;
+            width: -moz-available;    
+        }
+
+        .assistants-form-body {
+            padding: 0 24px;
+            height: 82vh;
+            overflow-y: auto;
+        }
+
+        .icon-style{
+            padding-top: 60px;
+
+            .ant-upload-wrapper.ant-upload-picture-circle-wrapper {
+                margin-left: 35%;
+                margin-top: -72px;
+            }
+        }
+
+        .function-button {
+            color: rgb(16, 163, 127);
+        }
+
+        .ant-form-item-control-input-content {
+            display: flex;
+        }
+
+        .ant-form-item{
+            margin-bottom: 6px;
+        }
+
+        .upload-btn{
+            width: 100%;
+            height: 32px;
+            padding: 2px 0;
+            color: #7171EE;
+        }
+
+        .dynamic-delete-button{
+            color: #7171EE;
+            margin-left: 12px;
+        }
+
+        .add-files{
+          margin-bottom: 24px;
+        }
+        
+        .footer-button {
+            width: 100%;
+            height: 50px;
+            // position: absolute;
+            padding-top: 8px;
+            display: flex !important;
+            justify-content: flex-end !important;
+            background-color: #FFF;
+            
+
+            &-cancel {
+                margin-right: 12px;
+            }
+
+            &-save {
+                margin-right: 24px;
+            }
+
+            // &-save:hover {
+            //     background-color: rgb(16, 163, 127);
+            // }
+        }
+
+        .form-style-upload{
+            position: relative;
+
+            .ant-col {
+                position: static;
+            }
+
+            .ant-form-item-control-input {
+                position: static;
+                margin-top: -32px;
+            }
+
+            .ant-upload-list.ant-upload-list-text {
+                margin: 8px 0;
+            }
+            
+            .ant-upload-list-item{
+              background: #7171EE33;
+              color: #7171EE;
+              width: max-content;
+            }
+
+            .ant-upload-list-item:hover{
+                background: #7171EE33;
+            }
+        }
+    }
+}

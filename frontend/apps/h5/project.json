@@ -1,0 +1,121 @@
+{
+  "name": "h5",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/h5/src",
+  "projectType": "application",
+  "targets": {
+    "_build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/h5",
+        "index": "apps/h5/src/index.html",
+        "baseHref": "/",
+        "main": "apps/h5/src/main.tsx",
+        "tsConfig": "apps/h5/tsconfig.app.json",
+        "assets": ["apps/h5/src/favicon.ico", "apps/h5/src/assets"],
+        "styles": ["apps/h5/src/styles.less"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/h5/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "index": "apps/h5/src/html/dev/index.html",
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "test": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "production": {
+          "fileReplacements": [{
+            "replace": "apps/h5/src/environments/environment.ts",
+            "with": "apps/h5/src/environments/environment.prod.ts"
+          }],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "build": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "h5:_build",
+        "transfers": [{
+          "from": "NX_H5_BASE_URL",
+          "to": "baseHref"
+        }]
+      },
+      "configurations": {
+        "development": {
+          "target": "h5:_build:development"
+        },
+        "test": {
+          "target": "h5:_build:test"
+        },
+        "production": {
+          "target": "h5:_build:production"
+        }
+      }
+    },
+    "_serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "h5:_build",
+        "hmr": true,
+        "proxyConfig": "proxyConf.js",
+        "allowedHosts": "all",
+        "host": "0.0.0.0"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "h5:_build:development"
+        },
+        "production": {
+          "buildTarget": "h5:_build:production",
+          "hmr": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "development",
+      "options": {
+        "target": "h5:_serve",
+        "transfers": [{
+            "from": "NX_H5_BASE_URL",
+            "to": "baseHref"
+          },
+          {
+            "from": "NX_H5_PORT",
+            "to": "port"
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/h5/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": ["type:app", "project:h5"]
+}

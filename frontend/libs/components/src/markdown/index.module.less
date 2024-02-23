@@ -1,0 +1,21 @@
+.markdown {
+    p {
+        margin: 0;
+    }
+
+    blockquote {
+        position: relative;
+        margin-left: 0;
+        padding-left: 40px;
+
+        &::before {
+            content: '';
+            height: 100%;
+            width: 3px;
+            background-color: #ddd;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+}

@@ -1,0 +1,57 @@
+/*全局样式修改覆盖注意样式优先级*/
+
+.ant-modal-root {
+    z-index: 1000;
+    position: initial;
+    height: 0;
+    width: inherit;
+}
+
+.ant-modal-root .ant-modal-mask {
+    // height: ;
+    position: absolute;
+}
+
+.ant-modal-root .ant-modal-wrap {
+    position: absolute;
+}
+
+.ant-modal .ant-modal-title {
+    color: rgba(0, 0, 0, 0.75);
+    text-align: inherit;
+    font-size: 14px;
+}
+
+.__xm_message_style__ {
+    position: absolute;
+    z-index: 11000;
+}
+
+.__xm_message_style__ .__xm_message_style__-notice .__xm_message_style__-custom-content > .anticon {
+    color: #7171ee;
+}
+
+.ant-drawer {
+    position: absolute;
+}
+
+.ant-drawer-content .ant-drawer-wrapper-body .ant-drawer-header {
+    padding: 16px 16px;
+}
+
+.ant-modal .ant-modal-close {
+    top: 20px;
+    right: 20px;
+}
+
+.ant-modal .ant-modal-footer .ant-btn + .ant-btn:not(.ant-dropdown-trigger) {
+    margin-inline-start: 16px;
+}
+
+.ant-input-affix-wrapper:focus {
+    box-shadow: none;
+}
+
+.ant-input-affix-wrapper-focused {
+    box-shadow: none;
+}

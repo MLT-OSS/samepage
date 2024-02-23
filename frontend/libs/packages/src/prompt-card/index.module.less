@@ -1,0 +1,91 @@
+.list-card {
+    width: 116px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: 1px solid #efecf6;
+    background: #fff;
+    margin: 4px;
+    padding: 8px;
+    padding-top: 6px;
+    padding-bottom: 0;
+    overflow: hidden;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 45%);
+
+    .item {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        height: 76px;
+        position: relative;
+    }
+
+    .title {
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.4;
+        color: rgba(0, 0, 0, 75%);
+    }
+
+    .content {
+        color: rgba(0, 0, 0, 45%);
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+    }
+
+    .info {
+        height: 22px;
+    }
+
+    .info-type {
+        float: left;
+        width: 28px;
+        border-radius: 0 100px 100px 0;
+        background: #ffb648;
+        margin-top: 2px;
+        margin-left: -8px;
+
+        .type-name {
+            font-size: 9px;
+            line-height: 13px;
+            letter-spacing: 0;
+            text-align: left;
+            color: #fff;
+            transform: scale(0.7);
+        }
+    }
+
+    .info-operate {
+        background-color: #fff;
+        display: none;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 16px;
+
+        .tooltip {
+            color: #212121;
+        }
+
+        .tooltip:hover {
+            color: #7171ee;
+        }
+
+        .edit {
+            color: #ffb648;
+        }
+
+        .edit:hover {
+            color: #f8a72e;
+        }
+    }
+}
+
+.list-card:hover .info-operate {
+    display: block;
+}

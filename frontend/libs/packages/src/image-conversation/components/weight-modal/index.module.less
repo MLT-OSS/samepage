@@ -1,0 +1,126 @@
+.weight-setting {
+    :global {
+        .setting-img-btn {
+            color: #fff !important;
+            font-size: 13px;
+            font-weight: 500;
+        }
+    }
+}
+
+.setting-modal {
+    text-align: center;
+
+    .content {
+        margin-top: 8px;
+    }
+
+    .setting-footer {
+        display: flex;
+        justify-content: space-between;
+
+        .right {
+            flex-grow: 1;
+        }
+    }
+
+    .save {
+        font-weight: 600;
+    }
+
+    .cancel {
+        color: #7171ee;
+        border: none;
+        font-weight: 600;
+        background-color: rgba(113, 113, 238, 10%);
+    }
+
+    .cancel:hover {
+        background-color: rgba(113, 113, 238, 30%);
+    }
+
+    .delete {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        color: #f00;
+        cursor: pointer;
+    }
+
+    :global {
+        .ant-modal-content {
+            padding: 20px 16px 16px;
+        }
+
+        .img-weight-box {
+            display: flex;
+            align-items: center;
+
+            .img-box {
+                width: 96px;
+                height: 96px;
+
+                .img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .right-box {
+                flex: 1;
+                margin-left: 16px;
+
+                .text-box {
+                    color: rgba(0, 0, 0, 75%);
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-bottom: 7px;
+
+                    .em {
+                        color: #7171ee;
+                        font-size: 16px;
+                        margin-left: 16px;
+                    }
+                }
+
+                .ant-form-item {
+                    margin: 0;
+                }
+
+                .ant-slider {
+                    margin: 12px 0;
+                }
+
+                .ant-slider-handle::after {
+                    box-shadow: 0 2px 8px rgba(113, 113, 238, 35%);
+                    width: 20px;
+                    height: 20px;
+                    inset-inline-start: -5px;
+                    inset-block-start: -5px;
+                    background-color: #7171ee;
+                }
+
+                .ant-slider-step {
+                    height: 6px;
+                }
+            }
+        }
+
+        .sub-text {
+            margin-top: 12px;
+            color: rgba(0, 0, 0, 55%);
+            font-size: 12px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+
+            .tip-icon {
+                color: #ccc;
+                font-size: 16px;
+                margin-right: 4px;
+            }
+        }
+    }
+}

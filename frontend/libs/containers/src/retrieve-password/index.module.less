@@ -1,0 +1,163 @@
+.update-pwd-panel {
+    position: relative;
+    height: 100%;
+
+    :global {
+        .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #7171ee;
+            text-align: center;
+        }
+
+        .update-pwd-form {
+            position: relative;
+            margin-top: 26px;
+
+            .update-pwd-form-input {
+                input {
+                    width: calc(100% - 36px);
+                }
+            }
+
+            .pwd-suffix-box {
+                position: absolute;
+                top: 238px;
+                right: -6px;
+                z-index: 50;
+                width: 60px;
+
+                .black-tooltip {
+                    .ant-tooltip-content {
+                        display: block;
+
+                        &::after {
+                            position: relative;
+                            right: calc(-100% + 36px);
+                            bottom: -5px;
+                            width: 8px;
+                            height: 8px;
+                            content: ' ';
+                            border: 8px solid transparent;
+                            border-top-color: #000;
+                        }
+                    }
+
+                    .ant-tooltip-inner {
+                        font-size: 13px;
+                        color: #fff;
+                        background-color: #000;
+
+                        .pwd-content {
+                            width: 214px;
+                        }
+                    }
+                }
+            }
+
+            .pwd-sufffix-icon {
+                position: absolute;
+                top: -20px;
+                right: 18px;
+                font-size: 20px;
+            }
+        }
+
+        .input-box {
+            display: flex;
+
+            .input-box-l {
+                flex: 1;
+            }
+
+            .right-box {
+                width: 104px;
+                height: 44px;
+                margin-left: 12px;
+                line-height: 44px;
+                border-radius: 4px;
+            }
+
+            .disabled {
+                /* 设置背景颜色为灰色 */
+                background-color: #ccc;
+
+                /* 设置文字颜色为深灰色 */
+                color: #777;
+
+                /* 设置鼠标指针为不可用样式 */
+                cursor: not-allowed;
+
+                /* 设置透明度为 0.6，使其看起来被禁用 */
+                opacity: 0.6;
+
+                /* 禁止元素接收鼠标事件 */
+                pointer-events: none;
+            }
+
+            .verify-btn {
+                font-size: 13px;
+                font-weight: 400;
+                color: #7171ee;
+                text-align: center;
+                cursor: pointer;
+                background-color: rgb(#7171ee, 0.1);
+            }
+
+            .code-box {
+                cursor: pointer;
+            }
+
+            .code-img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .code-tips {
+            color: #bbb;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .form-btns-box {
+            width: 100%;
+            margin-top: 40px;
+
+            .login-btn {
+                width: 100%;
+                height: 44px;
+                font-size: 16px;
+                font-weight: 600;
+
+                &:hover {
+                    background-color: #5c5cd6;
+                }
+            }
+        }
+
+        .footer-box {
+            width: 100%;
+            margin-top: 12px;
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.45);
+
+            .link-btn {
+                height: 18px;
+                padding: 0;
+                font-size: 13px;
+                color: #7171ee;
+
+                &:hover {
+                    color: #5c5cd6;
+                }
+            }
+
+            .footer-item {
+                width: 100%;
+                height: 18px;
+                text-align: center;
+            }
+        }
+    }
+}

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ai.samepage.mapper.BotMapper">
+    <resultMap id="BaseResultMap" type="ai.samepage.entity.BotInfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="desc" column="desc" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="system" column="system" jdbcType="TINYINT"/>
+        <result property="feature" column="feature" jdbcType="VARCHAR"/>
+        <result property="welcome" column="welcome" jdbcType="VARCHAR"/>
+        <result property="modelConfig" column="model_config" jdbcType="VARCHAR"/>
+        <result property="templateConfig" column="template_config" jdbcType="VARCHAR"/>
+        <result property="templatePrompt" column="template_prompt" jdbcType="VARCHAR"/>
+        <result property="key" column="key" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createId" column="create_id" jdbcType="BIGINT"/>
+        <result property="categoryKey" column="category_key"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="sort" column="sort"/>
+        <result property="isStream" column="is_stream"/>
+        <result property="featureConfig" column="feature_config"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        `id`,`name`,
+        `desc`,sort,
+            type, `system`,feature,
+            welcome,model_config,template_config,
+            template_prompt, `key`,create_time,
+            create_id,category_key,icon,update_time
+    </sql>
+
+    <resultMap id="BotInfoVO" type="ai.samepage.model.vo.BotInfoVO">
+        <result column="id" property="key"/>
+        <result property="name" column="name"/>
+        <result property="desc" column="desc"/>
+        <result property="system" column="system"/>
+        <result property="type" column="type"/>
+        <!-- <result property="iconUrl" column="icon"/>
+         <result property="sidebarIconUrl" column="sidebar"/>-->
+        <result property="categoryKey" column="categoryKey"/>
+        <result property="params" column="params" typeHandler="ai.samepage.utils.ParamTypeHandler"/>
+        <result property="feature" column="feature" typeHandler="ai.samepage.utils.ListTypeHandler"/>
+        <result property="lang" column="lang" typeHandler="ai.samepage.utils.BotLangTypeHandler"/>
+        <result property="sort" column="sort"/>
+        <result property="uniqKey" column="key"/>
+        <result property="isStream" column="is_stream"/>
+        <result property="h5" column="h5"/>
+        <result property="web" column="web"/>
+        <result property="extension" column="extension"/>
+        <result property="featureConfig" column="feature_config"
+                typeHandler="ai.samepage.utils.FeatureConfigTypeHandler"/>
+    </resultMap>
+    <select id="listBot" resultMap="BotInfoVO">
+        select bot.id              as id,
+               bot.sort            as sort,
+               bot.name            as name,
+               bot.desc            as `desc`,
+               bot.type            as type,
+               bot.system          as `system`,
+               bot.key             as `key`,
+               bot.lang            as lang,
+               bot.feature         as feature,
+               bot.template_config as params,
+               bot.is_stream       as is_stream,
+               bot.feature_config  as feature_config,
+               bot.category_key    as categoryKey,
+               bot.h5              as h5,
+               bot.extension       as extension,
+               bot.web             as web
+        from t_bot bot
+        where bot.is_deleted = false
+          and bot.bot_type = 'bot'
+          and (bot.system = true or bot.create_id = #{userId})
+        order by bot.sort, bot.id
+    </select>
+
+    <select id="getIcon" resultType="java.lang.String">
+        select ${field}
+        from t_bot
+        where id = #{id}
+    </select>
+
+
+    <select id="getSystemBot" resultType="string">
+        select bot.`key`        as `key`,
+               bot.sort         as sort,
+               bot.category_key as categoryKey
+        from t_bot bot
+        where bot.`system` = true
+          AND bot.is_deleted = false
+        order by bot.sort
+    </select>
+
+    <select id="selectInfo" resultMap="BaseResultMap">
+        select `id`,
+               `name`,
+               `desc`,
+               type,
+               `system`,
+               feature,
+               welcome,
+               sort,
+               lang,
+               model_config,
+               template_config,
+               template_prompt,
+               `key`,
+               create_time,
+               create_id,
+               category_key,
+               is_stream,
+               feature_config
+        from t_bot
+        where id = #{id}
+    </select>
+
+    <select id="getVersion" resultType="java.lang.String">
+        SELECT DATE_FORMAT(max(update_time), '%Y%c%e%H%i%s')
+        from t_bot
+    </select>
+    <select id="listFloatMenu" resultType="java.lang.String">
+        select distinct bot.key as `key`
+        from t_bot bot
+        where bot.is_deleted = false
+          and bot.bot_type = 'floating_menu'
+    </select>
+    <select id="listBotId" resultType="java.lang.Long">
+        select bot.id
+        from t_bot bot
+        where bot.is_deleted = false
+          and bot.bot_type = 'bot'
+          and (exists(select 1
+                      from t_bot_corp
+                      where t_bot_corp.is_deleted = false
+                        and t_bot_corp.bot_key = bot.`key`
+                        and t_bot_corp.corp_id = #{corpId})
+            or exists(select 1
+                      from t_bot_user bot_user
+                      where bot.`key` = bot_user.bot_key
+                        and bot_user.user_id = #{userId}
+                        and bot_user.is_deleted = false
+                        and not exists(select 1
+                                       from t_bot_corp
+                                       where corp_id = #{corpId})))
+
+        order by bot.sort, bot.id
+    </select>
+
+    <select id="pageBots" resultType="ai.samepage.model.vo.BaseBotInfoVO">
+        select `id`,
+        `name`,
+        `desc`,
+        type,
+        `system`,
+        feature,
+        `key`,
+        `icon`,
+        create_time,
+        create_id,
+        category_key,
+        update_time
+        from `t_bot`
+        where `is_deleted` = false
+        and `bot_type` = 'bot'
+        and (create_id = #{userId} or `system` = true)
+        <if test="keyword != null and keyword != ''">
+            and ( `name` like concat('%', #{keyword}, '%')
+            or `desc` like concat('%', #{keyword}, '%'))
+        </if>
+        <if test="category != null and category != ''">
+            and category_key = #{category}
+        </if>
+        <if test="botType != null">
+            and type = #{botType}
+        </if>
+        order by create_time desc,id desc
+    </select>
+
+    <select id="getUserVersion" resultType="java.lang.String">
+        select DATE_FORMAT(max(update_time), '%Y%c%e%H%i%s')
+        from t_bot
+        where create_id = #{userId}
+    </select>
+</mapper>

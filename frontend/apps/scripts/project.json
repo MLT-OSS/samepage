@@ -1,0 +1,111 @@
+{
+  "name": "scripts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/scripts/src",
+  "projectType": "application",
+  "targets": {
+    "_build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/scripts",
+        "index": "apps/scripts/src/index.html",
+        "baseHref": "/",
+        "main": "apps/scripts/src/main.tsx",
+        "tsConfig": "apps/scripts/tsconfig.app.json",
+        "assets": ["apps/scripts/src/favicon.ico", "apps/scripts/src/assets"],
+        "styles": ["apps/scripts/src/styles.less"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/scripts/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [{
+            "replace": "apps/scripts/src/environments/environment.ts",
+            "with": "apps/scripts/src/environments/environment.prod.ts"
+          }],
+          "optimization": true,
+          "outputHashing": "media",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "build": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "scripts:_build",
+        "transfers": [{
+          "from": "NX_SCRIPTS_BASE_URL",
+          "to": "baseHref"
+        }]
+      },
+      "configurations": {
+        "development": {
+          "target": "scripts:_build:development"
+        },
+        "test": {
+          "target": "scripts:_build:test"
+        },
+        "production": {
+          "target": "scripts:_build:production"
+        }
+      }
+    },
+    "_serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "scripts:_build",
+        "hmr": true,
+        "allowedHosts": "all",
+        "host": "0.0.0.0"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "scripts:_build:development"
+        },
+        "production": {
+          "buildTarget": "scripts:_build:production",
+          "hmr": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "development",
+      "options": {
+        "target": "scripts:_serve",
+        "transfers": [{
+            "from": "NX_SCRIPTS_BASE_URL",
+            "to": "baseHref"
+          },
+          {
+            "from": "NX_SCRIPTS_PORT",
+            "to": "port"
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/scripts/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": ["type:app", "project:scripts"]
+}

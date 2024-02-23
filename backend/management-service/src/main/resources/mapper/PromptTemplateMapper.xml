@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ai.samepage.mapper.PromptTemplateMapper">
+    <select id="selectListByUserAndType" resultType="ai.samepage.entity.PromptTemplate">
+        SELECT *
+        FROM (
+            SELECT *
+            FROM t_prompt_template
+            WHERE creator = #{userId}
+        UNION
+            SELECT *
+            FROM t_prompt_template
+            WHERE is_public=1
+        ) t
+        WHERE type IN
+        <foreach collection="types" item="type" open="(" close=")" separator=",">
+            #{type}
+        </foreach>
+        <if test="keyword != null">
+            AND (name like CONCAT('%',#{keyword},'%') OR `desc` like CONCAT('%',#{keyword},'%'))
+        </if>
+        AND is_deleted = 0
+        ORDER BY create_time desc
+    </select>
+
+
+    <select id="selectPromptsPageList" resultType="ai.samepage.entity.PromptTemplate">
+        SELECT * FROM t_prompt_template
+        <where>
+            and type = #{param.type}
+            <!-- 根据不同提示词类型拼接不同查询sql -->
+            <choose>
+                <!-- 个人提示词 -->
+                <when test="param.type==@ai.samepage.entity.PromptTemplateTypeEnum@user_custom">
+                    and creator = #{param.userId}
+                </when>
+                <!-- 公共提示词 -->
+                <when test="param.type==@ai.samepage.entity.PromptTemplateTypeEnum@official">
+                    and is_public=1
+                </when>
+                <!-- 快捷操作提示词 -->
+                <when test="param.type==@ai.samepage.entity.PromptTemplateTypeEnum@quick_action">
+                    and 1=1
+                </when>
+                <!-- 企业提示词 -->
+                <when test="param.type==@ai.samepage.entity.PromptTemplateTypeEnum@enterprise">
+                    and tenant_id=#{param.tenantId}
+                </when>
+                <otherwise>
+                    <!-- 非规定枚举，不展示任何内容 -->
+                    1=0
+                </otherwise>
+            </choose>
+            <!-- 查询条件：针对name进行模糊匹配 -->
+            <if test="param.name!=null and param.name!=''">
+                AND (name like CONCAT('%',#{param.name},'%') OR `desc` like CONCAT('%',#{param.name},'%'))
+            </if>
+        </where>
+        AND is_deleted = 0
+        ORDER BY create_time desc,id desc
+    </select>
+
+    <select id="selectPromptsCount" resultType="java.util.Map">
+        select a.userCustom,b.official,c.enterprise,d.quickAction
+            from (select count(*) as userCustom from t_prompt_template where TYPE ='user_custom' and is_deleted ='0' and creator = #{param.userId}) as a
+            left join (select count(*) as official from t_prompt_template where type='official' and is_deleted='0' and is_public=1) as b  on 1=1
+            left join (select count(*) as enterprise from t_prompt_template where type='enterprise' and is_deleted='0' and tenant_id=#{param.tenantId}) as c  on 1=1
+            left join (select count(*) as quickAction from t_prompt_template where type='quick_action' and is_deleted='0') as d  on 1=1;
+    </select>
+
+    <select id="findEnterprisePromptByName" resultType="ai.samepage.entity.PromptTemplate">
+        select * from t_prompt_template where tenant_id = #{tenantId}
+                                                    and `type` ='enterprise'
+                                                    and binary `name` = #{name}
+                                                    and is_deleted='0'
+    </select>
+</mapper>

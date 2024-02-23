@@ -1,0 +1,103 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 464px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 50%);
+
+    /* 背景为半透明黑色 */
+    z-index: 9999;
+
+    /* 设置悬浮层在最顶层 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup {
+    background-color: #fff;
+    width: 375px;
+    height: 60%;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        background-image: url('./assets/new-version.png');
+        width: 100%;
+        height: 144px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-right: 8px;
+        text-align: right;
+
+        .close {
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.25);
+            margin: 20px;
+            cursor: pointer;
+        }
+    }
+
+    .popup-content {
+        display: flex;
+        flex-direction: column;
+        padding: 0 16px;
+        color: rgba(0, 0, 0, 75%);
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 22px;
+        height: calc(100% - 144px - 88px);
+
+        .version-box {
+            margin-bottom: 20px;
+
+            .version {
+                font-weight: 600;
+            }
+        }
+
+        .update-box {
+            overflow-y: auto;
+
+            .update-item {
+                margin-bottom: 20px;
+                color: rgba(0, 0, 0, 75%);
+                font-size: 13px;
+                line-height: 22px;
+
+                /* 169.231% */
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .version {
+                }
+
+                .time {
+                }
+
+                .description {
+                    .title {
+                    }
+
+                    .change-list {
+                        .item {
+                            .idx {
+                                display: inline-block;
+                                margin-right: 4px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        padding: 24px 25px;
+    }
+}

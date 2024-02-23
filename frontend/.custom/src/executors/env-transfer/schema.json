@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "EnvTransfer executor",
+  "description": "环境变量透传project.json命令",
+  "type": "object",
+  "properties": {
+    "target": {
+      "type": "string",
+      "description": "指定运行的命令"
+    },
+    "transfers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "form": "string",
+          "to": "string"
+        }
+      },
+      "description": "转换变量的list"
+    },
+    "overrides": {
+      "type": "object",
+      "description": "覆盖执行命令的选项"
+    }
+  },
+  "required": ["target"]
+}

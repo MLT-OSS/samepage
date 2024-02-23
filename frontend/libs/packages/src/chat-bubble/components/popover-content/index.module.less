@@ -1,0 +1,44 @@
+.popover-content {
+    display: flex;
+    justify-content: center;
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 400;
+        text-align: center;
+
+        .icon {
+            height: 32px;
+            width: 32px;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+        }
+
+        &.active {
+            color: #7171ee;
+        }
+
+        &:hover {
+            color: #7171ee;
+            background: rgba(113, 113, 238, 10%);
+        }
+    }
+
+    .h5-item {
+        height: 72px;
+        width: 64px;
+
+        .icon {
+            font-size: 20px;
+        }
+    }
+}

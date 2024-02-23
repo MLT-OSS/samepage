@@ -1,0 +1,123 @@
+.chat-item {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    font-weight: 400;
+    line-height: 22px;
+    padding: 16px 16px 0;
+    background-color: #fff;
+    border-radius: 4px;
+
+    &::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    &:hover {
+        .hover-action-wapper {
+            .hover-group-btn {
+                z-index: 1;
+                display: flex;
+            }
+        }
+    }
+
+    .hover-action-wapper {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        top: -16px;
+        right: 0;
+
+        &:hover {
+            .hover-group-btn {
+                z-index: 1;
+                display: flex;
+            }
+        }
+
+        .placeholder {
+            flex-grow: 1;
+        }
+
+        .hover-group-btn {
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 10%);
+            display: none;
+
+            :global {
+                .hover-btn {
+                    padding: 0;
+                    width: 32px;
+                    height: 32px;
+                    font-size: 16px;
+                    border: none;
+                    border-radius: 0;
+                    color: #212121;
+
+                    .btn-icon {
+                        font-size: 16px;
+                    }
+
+                    &:first-child {
+                        border-radius: 4px 0 0 4px;
+                    }
+
+                    &:last-child {
+                        border-radius: 0 4px 4px 0;
+                    }
+
+                    &:hover {
+                        background-color: rgba(113, 113, 238, 10%);
+                        color: #7171ee;
+                    }
+                }
+            }
+        }
+    }
+
+    .action-type {
+        display: inline-block;
+        color: #7171ee;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.4;
+        margin-bottom: 12px;
+        padding: 4px 10px;
+        border-radius: 100px;
+        background-color: rgba(113, 113, 238, 20%);
+    }
+
+    .origin-text {
+        margin-bottom: 8px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background-color: rgba(241, 241, 253, 100%);
+    }
+
+    .gen-image {
+        margin: 8px 0;
+        max-width: 356px;
+    }
+
+    .desc {
+        margin-bottom: 8px;
+    }
+
+    .options {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 8px 0;
+
+        div:not(:first-child) {
+            margin-left: 12px;
+        }
+    }
+
+    .refer {
+        margin-bottom: 12px;
+    }
+}

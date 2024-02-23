@@ -1,0 +1,69 @@
+.piece {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 16px;
+    width: 100%;
+    height: 100%;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    border-bottom: 1px solid #f3f3f3;
+
+    .piece-info {
+        display: inline-flex;
+        overflow: hidden;
+        width: 100%;
+        align-items: center;
+
+        .icon {
+            font-size: 16px;
+            margin-right: 8px;
+            color: #212121;
+        }
+
+        .title {
+            padding-left: 4px;
+            color: rgba(0, 0, 0, 75%);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    .operate {
+        display: none;
+        flex-shrink: 0;
+
+        .icon {
+            font-size: 16px;
+            color: #212121;
+        }
+    }
+
+    &:hover {
+        .operate {
+            display: block;
+        }
+    }
+
+    &.h5-piece {
+        font-size: 17px;
+
+        .piece-info {
+            padding-left: 12px;
+        }
+
+        &:hover {
+            .operate {
+                display: none;
+            }
+        }
+
+        &:first-child {
+            border-top: 1px solid #f3f3f3;
+        }
+    }
+}

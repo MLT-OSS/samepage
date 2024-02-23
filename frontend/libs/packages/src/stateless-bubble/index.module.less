@@ -1,0 +1,198 @@
+.chat-item {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    font-weight: 400;
+    line-height: 22px;
+    padding: 16px 16px 0;
+    background-color: #fff;
+    border-radius: 4px;
+    margin-top: 10px;
+
+    &::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .origin-text {
+        color: rgba(0, 0, 0, 75%);
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 22px;
+        margin-bottom: 8px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background-color: rgba(241, 241, 253, 100%);
+        border: 1px solid #f1f1fd;
+
+        &.error {
+            border-color: #d85a5a;
+            background-color: #ffe0e0;
+        }
+
+        .inner-collapse {
+            // word-wrap: break-word;
+            // word-break: break-all;
+            display: inline-block;
+            width: 100%;
+            padding-left: 2em;
+            // 第二行缩进
+            // text-indent: -2em;
+            // margin-left: 2em;
+        }
+
+        .inner-collapse::first-letter {
+            margin-left: -2em;
+        }
+    }
+
+    .img-box {
+        width: 100%;
+        display: flex;
+        justify-items: flex-start;
+        margin-bottom: 12px;
+
+        img {
+            max-width: 100%;
+            max-height: 350px;
+            height: auto;
+
+            &.h5 {
+                max-height: 310px;
+            }
+        }
+    }
+
+    .source {
+        display: inline-block;
+        padding: 0 8px;
+        height: 26px;
+        line-height: 26px;
+        border-radius: 100px;
+        background-color: rgba(113, 113, 238, 20%);
+        color: rgba(113, 113, 238, 85%);
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .answer-text {
+        color: rgba(0, 0, 0, 75%);
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 22px;
+        margin-bottom: 8px;
+        white-space: pre-wrap;
+
+        .title {
+            font-weight: 600;
+        }
+    }
+
+    .loading-box {
+        display: flex;
+        margin-bottom: 8px;
+    }
+
+    .loading-text-box {
+        color: rgba(0, 0, 0, 75%);
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 22px;
+        margin-bottom: 8px;
+
+        .loading {
+            margin-left: 4px;
+
+            @keyframes dot-animation {
+                0% {
+                    opacity: 0;
+                }
+
+                50% {
+                    opacity: 1;
+                }
+
+                100% {
+                    opacity: 0;
+                }
+            }
+
+            .dot {
+                opacity: 0;
+                animation: dot-animation 2s infinite;
+            }
+
+            .dot:nth-child(1) {
+                animation-delay: 0s;
+            }
+
+            .dot:nth-child(2) {
+                animation-delay: 0.4s;
+            }
+
+            .dot:nth-child(3) {
+                animation-delay: 0.8s;
+            }
+        }
+    }
+
+    .error-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+
+        .error-inner {
+            color: #f00;
+            font-size: 13px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+
+            .tip-icon {
+                font-size: 16px;
+                color: #f00;
+            }
+
+            .error-txt {
+                margin-left: 4px;
+            }
+        }
+    }
+
+    .options {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 8px 0;
+
+        div:not(:first-child) {
+            margin-left: 12px;
+        }
+    }
+}
+
+.popover-content {
+    .icon {
+        height: 32px;
+        width: 32px;
+        justify-content: center;
+        font-size: 16px;
+        cursor: pointer;
+
+        &:hover {
+            color: #7171ee;
+            background: rgba(113, 113, 238, 10%);
+        }
+
+        &.active {
+            color: #7171ee;
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+        }
+    }
+}

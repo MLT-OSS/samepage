@@ -1,0 +1,227 @@
+<?xml version="1.0" ?>
+
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+  <module name="Header">
+    <property name="headerFile" value="${checkstyle.header.file}"/>
+    <property name="fileExtensions" value="java"/>
+  </module>
+
+  <module name="NewlineAtEndOfFile"/>
+  <module name="FileTabCharacter"/>
+
+  <!-- Added as per the issue #7384 - Prohibit @author tags in Javadoc -->
+  <module name="RegexpSingleline">
+    <property name="format" value="^\s*\*\s*@author" />
+    <property name="minimum" value="0" />
+    <property name="maximum" value="0" />
+    <property name="message" value="Prohibit @author tags in Javadoc" />
+    <property name="fileExtensions" value="java" />
+  </module>
+
+  <module name="RegexpSingleline">
+    <property name="format" value="^\s*\*\s*@date" />
+    <property name="minimum" value="0" />
+    <property name="maximum" value="0" />
+    <property name="message" value="Prohibit @date tags in Javadoc" />
+    <property name="fileExtensions" value="java" />
+  </module>
+
+  <module name="TreeWalker">
+    <module name="SuppressionCommentFilter">
+      <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
+      <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
+      <property name="checkFormat" value="$1"/>
+    </module>
+
+    <module name="RedundantModifier">
+      <property name="tokens" value="INTERFACE_DEF,ENUM_DEF,METHOD_DEF"/>
+    </module>
+
+    <module name="AvoidStarImport"/>
+    <module name="AvoidStaticImport"/>
+    <module name="RedundantImport"/>
+    <module name="UnusedImports" />
+    <module name="NeedBraces"/>
+
+    <module name="WhitespaceAfter"/>
+    <module name="WhitespaceAround">
+      <property name="allowEmptyConstructors" value="true"/>
+      <property name="allowEmptyMethods" value="true"/>
+      <property name="allowEmptyLambdas" value="true"/>
+      <property name="allowEmptyTypes" value="true"/>
+      <property name="ignoreEnhancedForColon" value="false"/>
+    </module>
+    <module name="ParenPad"/>
+    <module name="SingleSpaceSeparator"/>
+    <module name="NoWhitespaceBefore">
+      <property name="tokens" value="COMMA,SEMI,POST_INC,POST_DEC,ELLIPSIS,METHOD_REF"/>
+    </module>
+    <module name="NoWhitespaceBefore">
+      <property name="tokens" value="DOT"/>
+      <property name="allowLineBreaks" value="true"/>
+    </module>
+    <module name="NoWhitespaceAfter"/>
+    <module name="NoWhitespaceAfter">
+      <property name="tokens" value="DOT"/>
+      <property name="allowLineBreaks" value="false"/>
+    </module>
+    <module name="GenericWhitespace"/>
+
+    <module name="EmptyLineSeparator">
+      <property name="tokens" value="PACKAGE_DEF,IMPORT,STATIC_IMPORT,INTERFACE_DEF,STATIC_INIT,INSTANCE_INIT,CTOR_DEF,VARIABLE_DEF"/>
+      <property name="allowNoEmptyLineBetweenFields" value="true"/>
+      <property name="allowMultipleEmptyLinesInsideClassMembers" value="false"/>
+    </module>
+
+    <module name="Indentation">
+      <property name="basicOffset" value="4"/>
+      <property name="caseIndent" value="4"/>
+    </module>
+
+    <module name="MethodParamPad">
+      <property name="allowLineBreaks" value="true"/>
+    </module>
+    <module name="OneStatementPerLine"/>
+    <module name="EmptyStatement"/>
+
+    <module name="ModifierOrder" />
+
+    <module name="Regexp">
+      <property name="format" value="com\.google\.common\.io\.Closer"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use org.apache.druid.java.util.common.io.Closer instead of Guava's Closer"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="^// {2}"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Don't commit IntelliJ-style commented code lines"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="/\*[^\*].*?\n(\s*\*.*?\n)*\s+\*/[\s\n]*(transient|volatile|strictfp|synchronized|native|abstract|class|interface|enum|static|private|public|protected|default|void|byte|char|short|int|float|long|double|[A-Z])"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Comments to classes and methods must be Javadoc comments"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="natural\(\)[\s\n]*\.[\s\n]*nullsFirst\(\)"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use Comparators.naturalNullsFirst() instead of Ordering.natural().nullsFirst()"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="Enums\.getIfPresent\("/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use GuavaUtils.getEnumIfPresent() instead of Enums.getIfPresent()"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="(Byte|Character|Short|Integer|Long|Float|Double)\.TYPE"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use primitive.class instead. But check twice that you don't actually need BoxedPrimitive.class instead of BoxedPrimitive.TYPE"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="Float\.MAX_VALUE"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use Float.POSITIVE_INFINITY"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="Float\.MIN_VALUE"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use Float.NEGATIVE_INFINITY"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="Double\.MAX_VALUE"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use Double.POSITIVE_INFINITY"/>
+    </module>
+    <module name="Regexp">
+      <property name="format" value="Double\.MIN_VALUE"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use Double.NEGATIVE_INFINITY"/>
+    </module>
+
+    <module name="Regexp">
+      <!-- Couldn't check this in forbidden-apis, because javac replaces compile-time constants without refs. -->
+      <property name="format" value="(Shorts|Chars|Ints|Longs|Floats|Doubles)\.BYTES"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Use java.lang.Primitive.BYTES instead."/>
+    </module>
+    <!-- This regex should be replaced with an IntelliJ inspection when teamcity.jetbrains.com updates to at least IntelliJ 2018.1 (currently it uses 2017.2) -->
+    <module name="Regexp">
+      <property name="format" value='[a-z][a-zA-Z0-9_]*\.equals\((\"|[A-Z_]+\))'/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value='Use "string".equals(javaVar) and STRING_CONSTANT.equals(javaVar) instead of javaVar.equals("string") and javaVar.equals(STRING_CONSTANT)'/>
+    </module>
+
+    <module name="Regexp">
+      <property name="format" value="toArray\([\s\n]*new [a-zA-Z0-9_]+\[[^0]"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value='Use toArray(new Object[0]) instead'/>
+    </module>
+
+    <module name="Regexp">
+      <property name="format" value='^Throwables.propagate\('/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Throwables.propagate() shouldn't be used in new code"/>
+    </module>
+
+    <module name="PackageName">
+      <property name="format" value="^ai.samepage.*$"/>
+    </module>
+    <module name="PackageDeclaration"/>
+
+    <module name="ImportOrder">
+      <property name="groups" value="*,javax,java"/>
+      <property name="ordered" value="true"/>
+      <property name="separated" value="true"/>
+      <property name="option" value="bottom"/>
+      <property name="sortStaticImportsAlphabetically" value="true"/>
+    </module>
+
+    <module name="Regexp">
+      <property name="id" value="duplicateLine"/>
+      <property name="format" value="^(.*;)(\r?\n\1)+$"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="message" value="Duplicate line"/>
+    </module>
+
+     <!-- Added as per the issue #6936 - Prohibit method names starting with capital letters -->
+	 <module name="MethodName">
+	   <property name = "format" value = "^[a-z_]*[a-z0-9][a-zA-Z0-9_]*$"/>
+	 </module>
+
+    <!-- Added as per the issue #7609 - Local variable names shouldn't start with capital -->
+    <module name="LocalVariableName">
+      <property name="format" value="^[a-z_]*[a-z0-9][a-zA-Z0-9_]*$"/>
+    </module>
+    <module name="LocalFinalVariableName">
+      <property name="format" value="^[a-z_]*[a-z0-9][a-zA-Z0-9_]*$"/>
+    </module>
+    <module name="ConstantName">
+      <property name="format" value="^log(ger)?$|^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
+    </module>
+
+    <module name="StringLiteralEquality"/>
+
+  </module>
+</module>
