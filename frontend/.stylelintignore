@@ -1,0 +1,11 @@
+*.ts
+*.tsx
+*.js
+*.jsx
+*.png
+*.eot
+*.ttf
+*.woff
+*.conf
+*.yaml
+*.yml

@@ -1,0 +1,163 @@
+.cue-word {
+    padding: 0;
+    padding-bottom: 12px;
+    width: 100%;
+    overflow-x: hidden;
+
+    .cue-word-tab {
+        border-bottom: 1px solid #fff;
+        width: 100%;
+        height: 42px;
+        display: flex;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+
+        :global {
+            .ant-tabs-nav {
+                margin: 0;
+            }
+
+            .ant-tabs-nav::before {
+                border-bottom: none;
+            }
+
+            .ant-tabs-tab {
+                padding: 10px 30px;
+            }
+
+            .ant-tabs-tab + .ant-tabs-tab {
+                margin: 0;
+            }
+
+            .ant-tabs-tab-active {
+                font-weight: 600;
+            }
+
+            .ant-tabs-nav .ant-tabs-ink-bar {
+                width: 24px !important;
+                height: 4px;
+                bottom: 0;
+            }
+        }
+    }
+
+    .cue-word-info {
+        display: flex;
+        width: 100%;
+        min-height: 124px;
+        justify-content: center;
+    }
+
+    :global {
+        .header {
+            text-align: center;
+
+            .word {
+                color: rgba(0, 0, 0, 0.75);
+                font-size: 13px;
+                font-weight: 600;
+                padding-left: 2px;
+            }
+        }
+
+        .table-card {
+            margin-top: 10px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            background: #f8f8fe;
+
+            .prompt-wrap {
+                width: 100%;
+            }
+
+            .use {
+                padding: 12px 12px 8px;
+                display: flex;
+                height: 52px;
+            }
+
+            .cue-word-add-but {
+                width: 32px;
+                height: 32px;
+                padding: 5px;
+                border-color: #f3f3f3;
+                margin-left: 8px;
+            }
+
+            .cue-word-add-but:hover {
+                color: #7171ee;
+                background-color: rgba(113, 113, 238, 0.1);
+            }
+
+            .table-list {
+                padding-left: 8px;
+                display: flex;
+                flex-flow: row wrap;
+            }
+
+            .pagetation {
+                padding: 0 12px;
+                height: 32px;
+
+                .page-total {
+                    float: left;
+                    color: rgba(0, 0, 0, 0.45);
+                    font-size: 11px;
+                    padding-top: 8px;
+                }
+
+                .page {
+                    float: right;
+
+                    .ant-pagination {
+                        font-size: 11px;
+                        min-width: 0px !important;
+
+                        & > li {
+                            display: inline-flex;
+
+                            &.ant-pagination-item {
+                                margin-inline-end: 0;
+                            }
+
+                            &.ant-pagination-item-active,
+                            &.ant-pagination-item-1 {
+                                margin-inline-end: 8px;
+                            }
+                        }
+                    }
+
+                    .ant-pagination .ant-pagination-prev {
+                        min-width: 0px !important;
+                    }
+
+                    .ant-pagination .ant-pagination-next {
+                        min-width: 0px !important;
+                    }
+
+                    .current-page {
+                        line-height: 32px;
+                    }
+
+                    .ant-pagination-item {
+                        min-width: 0px !important;
+                        display: none;
+                        border: 0;
+                    }
+
+                    .ant-pagination .ant-pagination-item-active {
+                        background-color: transparent;
+                        border-color: #7171ee;
+                        display: inline-block !important;
+                        color: rgba(0, 0, 0, 0.75);
+                    }
+                }
+            }
+        }
+
+        .ant-input-clear-icon {
+            font-size: 14px;
+        }
+    }
+}

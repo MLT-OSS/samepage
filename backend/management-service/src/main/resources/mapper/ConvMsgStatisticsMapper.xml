@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ai.samepage.mapper.ConvMsgStatisticsMapper">
+
+    <resultMap id="BaseResultMap" type="ai.samepage.entity.ConvMsgStatistics">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="model" column="model" jdbcType="VARCHAR"/>
+            <result property="convId" column="conv_id" jdbcType="BIGINT"/>
+            <result property="msgId" column="msg_id" jdbcType="VARCHAR"/>
+            <result property="requestToken" column="request_token" jdbcType="INTEGER"/>
+            <result property="responseToken" column="response_token" jdbcType="INTEGER"/>
+            <result property="createId" column="create_id" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,model,conv_id,
+        msg_id,request_token,response_token,
+        create_id,create_time
+    </sql>
+</mapper>

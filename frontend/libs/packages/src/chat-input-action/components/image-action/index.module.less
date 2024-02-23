@@ -1,0 +1,99 @@
+.image-action {
+    height: 90px;
+
+    .custom-upload {
+        height: 100%;
+
+        &.disabled {
+            opacity: 0.5;
+        }
+
+        :global {
+            .ant-upload-drag {
+                height: 100%;
+                border: 1px dashed #7171ee;
+                background-color: #fff;
+            }
+        }
+
+        &.error {
+            :global {
+                .ant-upload-drag {
+                    border-color: #f00;
+                    background-color: #ffe0e0;
+                }
+            }
+        }
+
+        .drag-box {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .upload-drag-icon {
+                font-size: 32px;
+            }
+
+            .upload-drag-info {
+                margin-left: 8px;
+                text-align: left;
+
+                .upload-text {
+                    color: #7171ee;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                .upload-hint {
+                    color: #7171ee;
+                    font-size: 11px;
+                    font-weight: 400;
+                    margin-top: 2px;
+                }
+            }
+        }
+
+        .error-drag {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .error-drag-text {
+                color: #f00;
+                text-align: justify;
+                font-size: 13px;
+                font-weight: 600;
+            }
+        }
+
+        .loadinng-drag {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .loadinng-drag-text {
+                color: #7171ee;
+                text-align: justify;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .cancel-btn {
+                margin-left: 16px;
+                color: rgba(0, 0, 0, 0.45);
+                font-size: 14px;
+                font-weight: 400;
+                padding: 0;
+
+                &:active,
+                &:hover {
+                    color: rgba(0, 0, 0, 0.45) !important;
+                    background-color: unset !important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,115 @@
+.pdf-box {
+    height: 100%;
+    flex: 1;
+    min-width: 600px;
+    position: relative;
+
+    :global {
+        .pdf-viewer {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+
+            .toolbar {
+                background: #fff;
+                padding: 6px 12px;
+                border-bottom: 1px solid rgba(145, 158, 171, 0.16);
+                display: flex;
+                align-items: center;
+                overflow-x: auto;
+
+                .toolbar-item {
+                    padding: 6px;
+                    border-radius: 4px;
+
+                    & + .toolbar-item {
+                        margin-left: 12px;
+                    }
+
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.04);
+                        cursor: pointer;
+                        user-select: none;
+                    }
+
+                    &.checked {
+                        background: rgba(0, 0, 0, 0.04);
+                    }
+                }
+
+                .divider {
+                    margin: 0 12px;
+                    width: 1px;
+                    height: 16px;
+                    background: rgba(145, 158, 171, 0.24);
+                }
+
+                .custom-select {
+                    width: 86px;
+                    padding: 0;
+
+                    &.ant-select .ant-select-selector {
+                        display: inline-flex;
+                        align-items: center;
+                        font-size: 14px;
+                        box-shadow: unset !important;
+                        border: 1px solid #e5e8eb !important;
+                        border-radius: 4px;
+                        color: #212b36;
+                    }
+                }
+
+                .page-input {
+                    width: 48px;
+                    height: 24px;
+                    margin-left: 12px;
+                    margin-right: 8px;
+
+                    input {
+                        height: 24px;
+                        text-align: center;
+                        border: 1px solid rgba(145, 158, 171, 0.12);
+                        border-radius: 4px;
+
+                        &:focus-visible {
+                            border-color: #7171ee;
+                            outline: none;
+                        }
+                    }
+                }
+
+                .total-page {
+                    font-size: 14px;
+                    color: #212b36;
+                }
+            }
+
+            .viewer-box {
+                display: flex;
+                flex: 1;
+                min-height: 0;
+                position: relative;
+
+                .thumbnail {
+                    width: 180px;
+                    background: #e4e9ed;
+                }
+
+                .viewer-content-wrapper {
+                    display: flex;
+                    flex: 1;
+                    min-height: 0;
+                    position: relative;
+
+                    .viewer-content {
+                        flex: 1;
+                        min-height: 0;
+                        position: relative;
+                        overflow-y: overlay !important;
+                        overscroll-behavior: contain;
+                    }
+                }
+            }
+        }
+    }
+}

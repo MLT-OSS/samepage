@@ -1,0 +1,282 @@
+version: '3.8'
+
+services:
+  open-assistant-service:
+    image: samepaage/open-assistant-api:main
+    restart: always
+    container_name: open-assistant-service
+    volumes:
+      - ./logs/open-assistant-api:/app/logs
+    ports:
+      - '8086:8086'
+    networks:
+      - samepage
+    depends_on:
+      init-db:
+        condition: service_completed_successfully
+      init_psql:
+        condition: service_completed_successfully
+      one-api:
+        condition: service_healthy
+    environment:
+      # app
+      MODE: api
+      APP_NAME: open-assistant-api
+      APP_DEBUG: false
+      APP_ENV: prod
+      APP_AUTH_ENABLE: true
+      APP_AUTH_ADMIN_TOKEN: admin
+      APP_SERVER_WORKERS: 8
+      APP_API_PREFIX: /api
+      LOG_LEVEL: INFO
+    env_file:
+      - application.env
+      - application_open-assistant.env
+  open-assistant-service-worker:
+    image: samepaage/open-assistant-api:main
+    restart: always
+    networks:
+      - samepage
+    volumes:
+      - ./logs/open-assistant-worker:/app/logs
+    environment:
+      # app
+      MODE: worker
+      APP_DEBUG: false
+      APP_ENV: prod
+      LOG_LEVEL: INFO
+    env_file:
+      - application.env
+      - application_open-assistant.env
+    depends_on:
+      init-db:
+        condition: service_completed_successfully
+      init_psql:
+        condition: service_completed_successfully
+      one-api:
+        condition: service_healthy
+  frontend:
+    image: samepaage/samepage-web:main
+    container_name: frontend
+    restart: always
+    networks:
+      - samepage
+    ports:
+      - "80:80"
+    env_file:
+      - application.env
+    depends_on:
+      management-service:
+        condition: service_started
+    entrypoint: >
+      /bin/sh -c "
+      sed -i \"s|__MANAGEMENT_SERVICE_BASE_URL__|$${MANAGEMENT_SERVICE_BASE_URL}|g\" /etc/nginx/conf.d/default.conf 
+      &&  sed -i \"s|__BUCKET_NAME__|$${S3_BUCKET_NAME}|g\" /etc/nginx/conf.d/default.conf 
+      &&  sed -i \"s|__S3_ENDPOINT__|$${S3_ENDPOINT}|g\" /etc/nginx/conf.d/default.conf 
+      &&  sed -i \"s|__S3_HOST__|$${S3_ENDPOINT#*//}|g\" /etc/nginx/conf.d/default.conf 
+      &&  sed -i \"s|__ONE_API_SERVER__|$${ONE_API_SERVICE}|g\" /etc/nginx/conf.d/default.conf 
+      && nginx -g \"daemon off;\";
+      "
+  management-service:
+    image: samepaage/samepage-api:main
+    container_name: management-service
+    restart: always
+    networks:
+      - samepage
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./logs/management:/app/logs
+    env_file:
+      - application.env
+      - application_management-service.env
+    depends_on:
+      init-db:
+        condition: service_completed_successfully
+      create-buckets:
+        condition: service_completed_successfully
+      one-api:
+        condition: service_healthy
+      ai-service:
+        condition: service_started
+  ai-service:
+    image: samepaage/samepage-ai-core:main
+    container_name: ai-service
+    restart: always
+    networks:
+      - samepage
+    ports:
+      - "8082:8082"
+    env_file:
+      - application.env
+      - application_ai-service.env
+    environment:
+      - MODE=api
+    depends_on:
+      init-db:
+        condition: service_completed_successfully
+      init_psql:
+        condition: service_completed_successfully
+      one-api:
+        condition: service_healthy
+  ai-service-worker:
+    image: samepaage/ai-service:main
+    container_name: ai-service-worker
+    restart: always
+    networks:
+      - samepage
+    env_file:
+      - application.env
+      - application_ai-service.env
+    environment:
+      - MODE=worker
+    depends_on:
+      init-db:
+        condition: service_completed_successfully
+      init_psql:
+        condition: service_completed_successfully
+      one-api:
+        condition: service_healthy
+  one-api:
+    image: justsong/one-api:latest
+    container_name: one-api
+    platform: linux/amd64
+    restart: always
+    command: --log-dir /app/logs
+    networks:
+      - samepage
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data/oneapi:/data
+      - ./logs/oneapi:/app/logs
+    env_file:
+      - application.env
+    depends_on:
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -q -O - http://localhost:3000/api/status | grep -o '\"success\":\\s*true' | awk -F: '{print $2}'" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  db:
+    image: mysql:5.7.44
+    container_name: db
+    restart: always
+    platform: linux/amd64
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    networks:
+      - samepage
+    env_file:
+      - application.env
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 2
+  redis:
+    image: redis:6-alpine
+    container_name: redis
+    restart: always
+    env_file:
+      - application.env
+    volumes:
+      - ./data/redis/data:/data
+    ports:
+      - '6379:6379'
+    entrypoint: >
+      /bin/sh -c "redis-server --requirepass $${REDIS_PASSWORD};"
+    networks:
+      - samepage
+    healthcheck:
+      test: [ "CMD", "redis-cli","ping" ]
+  pg:
+    image: ankane/pgvector:v0.5.0
+    container_name: pg
+    restart: always
+    env_file:
+      - application.env
+    networks:
+      - samepage
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/pg/data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+  minio:
+    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+    container_name: minio
+    restart: always
+    env_file:
+      - application.env
+    networks:
+      - samepage
+    volumes:
+      - ./data/minio/data:/minio_data
+    ports:
+      - '9001:9001'
+      - '9000:9000'
+    #command: minio server /minio_data --console-address ':9001'
+
+    command: minio server /minio_data --console-address ':9001'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+  create-buckets:
+    image: minio/mc
+    networks:
+      - samepage
+    env_file:
+      - application.env
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set minio http://minio:9000 $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
+      /usr/bin/mc mb -p minio/$${BUCKET_NAME};
+      /usr/bin/mc mb -p minio/$${OPEN_ASSISTANT_S3_BUCKET_NAME};
+      exit 0;
+      "
+  init-db:
+    image: imega/mysql-client
+    platform: linux/amd64
+    env_file:
+      - application.env
+    networks:
+      - samepage
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./init-scripts:/scripts  # 将包含初始化脚本的目录挂载到容器中
+      - ./run_scripts.sh:/run_scripts.sh  # 将 Bash 脚本挂载到容器中
+    command: sh -c 'chmod +x /run_scripts.sh && /run_scripts.sh'
+  init_psql:
+    image: governmentpaas/psql
+    networks:
+      - samepage
+    depends_on:
+      pg:
+        condition: service_healthy
+    env_file:
+      - application.env # 将密码作为环境变量传递给 governmentpaas/psql 镜像
+    volumes:
+      - ./init-pg:/scripts  # 挂载初始化脚本到容器内部
+    command: >
+      /bin/sh -c "
+      psql -h $${POSTGRES_HOST} -d $${POSTGRES_DB} -p $${POSTGRES_PORT}  -U $${POSTGRES_USER} --file=/scripts/init.sql ;
+      "
+networks:
+  samepage:

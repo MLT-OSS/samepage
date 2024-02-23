@@ -1,0 +1,48 @@
+.custom-select {
+    display: flex;
+    align-items: center;
+    background-color: rgba(113, 113, 238, 0.05);
+    box-shadow: none;
+    height: 44px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    &:hover {
+        border-color: #7171ee;
+    }
+
+    &:focus-within {
+        background-color: #fff;
+        border-color: #7171ee;
+
+        .prefix {
+            color: #7171ee;
+        }
+    }
+
+    .prefix {
+        color: #c9c9c9;
+
+        :global {
+            .select-prefix-icon {
+                font-size: 20px;
+                margin-left: 11px;
+                margin-right: 8px;
+            }
+        }
+    }
+
+    :global {
+        .ant-select {
+            width: 100%;
+        }
+
+        .ant-select-selector {
+            padding-left: 0 !important;
+
+            .ant-select-selection-search {
+                inset-inline-start: 0 !important;
+            }
+        }
+    }
+}

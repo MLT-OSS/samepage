@@ -1,0 +1,189 @@
+.refer-pic {
+    .custom-btn {
+        padding: 0 8px;
+        height: 26px;
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+
+        :global {
+            .anticon {
+                font-size: 16px;
+
+                & + span {
+                    margin-inline-start: 4px;
+                }
+            }
+        }
+    }
+}
+
+.upload-drawer {
+    text-align: center;
+
+    :global {
+        .ant-drawer-content-wrapper {
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+        }
+
+        .ant-drawer-header {
+            border: none;
+            padding-top: 20px !important;
+            padding-bottom: 8px !important;
+        }
+
+        .ant-drawer-header-title {
+            justify-content: flex-end;
+
+            .ant-drawer-close {
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+            }
+        }
+
+        .ant-drawer-body {
+            padding: 16px;
+            padding-top: 0;
+        }
+
+        .upload-box {
+            height: 218px;
+        }
+
+        .custom-upload {
+            .ant-upload-drag {
+                border-color: #7171ee;
+                background-color: #fff;
+                height: 200px;
+            }
+
+            .ant-upload-disabled {
+                background-color: #fff;
+                opacity: 0.5;
+            }
+
+            .drag-box {
+                .ant-upload-drag-icon {
+                    margin: 0;
+                    margin-bottom: 14px;
+                }
+
+                .ant-upload-text {
+                    color: #7171ee !important;
+                    font-size: 14px;
+                    font-weight: 400;
+                    margin-bottom: 4px;
+                }
+
+                .ant-upload-text-des {
+                    color: #7171ee !important;
+                    font-size: 11px;
+                    font-weight: 400;
+                    margin-bottom: 4px;
+                    padding: 0 24px;
+                }
+
+                .ant-upload-hint {
+                    color: rgba(0, 0, 0, 45%);
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 22px;
+                    margin: 0;
+                }
+            }
+        }
+
+        .file-box {
+            width: 100%;
+            height: 200px;
+            box-sizing: border-box;
+            padding-top: 86px;
+            border-radius: 4px;
+            border: 1px dashed #d2d2d2;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .loading-icon {
+                font-size: 32px;
+                margin-bottom: 12px;
+            }
+
+            .progress-info {
+                color: #7171ee;
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+
+        .image-preview {
+            margin-right: 16px;
+            position: relative;
+
+            .img-box {
+                width: 88px;
+                height: 88px;
+                border-radius: 4px;
+                overflow: hidden;
+
+                .img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .mask {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                display: none;
+                border-radius: 4px;
+                background-color: rgba(0, 0, 0, 30%);
+                justify-content: center;
+                align-items: center;
+
+                .close-icon {
+                    font-size: 24px;
+                    position: absolute;
+                    top: -10px;
+                    right: -8px;
+                    cursor: pointer;
+                }
+            }
+
+            &:hover .mask {
+                display: flex;
+            }
+        }
+
+        .send {
+            float: right;
+            font-weight: 600;
+            margin-top: 16px;
+            margin-right: 2px;
+            margin-left: 16px;
+        }
+
+        .cancel {
+            float: right;
+            font-weight: 600;
+            margin-top: 16px;
+            margin-right: 2px;
+            margin-left: 16px;
+            border: none;
+            background-color: rgba(113, 113, 238, 10%);
+        }
+
+        .del {
+            float: left;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+    }
+}

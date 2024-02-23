@@ -1,0 +1,470 @@
+/*
+ *
+ *                                  Apache License
+ *                            Version 2.0, January 2004
+ *                         https://www.apache.org/licenses/
+ *
+ *    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+ *
+ *    1. Definitions.
+ *
+ *       "License" shall mean the terms and conditions for use, reproduction,
+ *       and distribution as defined by Sections 1 through 9 of this document.
+ *
+ *       "Licensor" shall mean the copyright owner or entity authorized by
+ *       the copyright owner that is granting the License.
+ *
+ *       "Legal Entity" shall mean the union of the acting entity and all
+ *       other entities that control, are controlled by, or are under common
+ *       control with that entity. For the purposes of this definition,
+ *       "control" means (i) the power, direct or indirect, to cause the
+ *       direction or management of such entity, whether by contract or
+ *       otherwise, or (ii) ownership of fifty percent (50%) or more of the
+ *       outstanding shares, or (iii) beneficial ownership of such entity.
+ *
+ *       "You" (or "Your") shall mean an individual or Legal Entity
+ *       exercising permissions granted by this License.
+ *
+ *       "Source" form shall mean the preferred form for making modifications,
+ *       including but not limited to software source code, documentation
+ *       source, and configuration files.
+ *
+ *       "Object" form shall mean any form resulting from mechanical
+ *       transformation or translation of a Source form, including but
+ *       not limited to compiled object code, generated documentation,
+ *       and conversions to other media types.
+ *
+ *       "Work" shall mean the work of authorship, whether in Source or
+ *       Object form, made available under the License, as indicated by a
+ *       copyright notice that is included in or attached to the work
+ *       (an example is provided in the Appendix below).
+ *
+ *       "Derivative Works" shall mean any work, whether in Source or Object
+ *       form, that is based on (or derived from) the Work and for which the
+ *       editorial revisions, annotations, elaborations, or other modifications
+ *       represent, as a whole, an original work of authorship. For the purposes
+ *       of this License, Derivative Works shall not include works that remain
+ *       separable from, or merely link (or bind by name) to the interfaces of,
+ *       the Work and Derivative Works thereof.
+ *
+ *       "Contribution" shall mean any work of authorship, including
+ *       the original version of the Work and any modifications or additions
+ *       to that Work or Derivative Works thereof, that is intentionally
+ *       submitted to Licensor for inclusion in the Work by the copyright owner
+ *       or by an individual or Legal Entity authorized to submit on behalf of
+ *       the copyright owner. For the purposes of this definition, "submitted"
+ *       means any form of electronic, verbal, or written communication sent
+ *       to the Licensor or its representatives, including but not limited to
+ *       communication on electronic mailing lists, source code control systems,
+ *       and issue tracking systems that are managed by, or on behalf of, the
+ *       Licensor for the purpose of discussing and improving the Work, but
+ *       excluding communication that is conspicuously marked or otherwise
+ *       designated in writing by the copyright owner as "Not a Contribution."
+ *
+ *       "Contributor" shall mean Licensor and any individual or Legal Entity
+ *       on behalf of whom a Contribution has been received by Licensor and
+ *       subsequently incorporated within the Work.
+ *
+ *    2. Grant of Copyright License. Subject to the terms and conditions of
+ *       this License, each Contributor hereby grants to You a perpetual,
+ *       worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+ *       copyright license to reproduce, prepare Derivative Works of,
+ *       publicly display, publicly perform, sublicense, and distribute the
+ *       Work and such Derivative Works in Source or Object form.
+ *
+ *    3. Grant of Patent License. Subject to the terms and conditions of
+ *       this License, each Contributor hereby grants to You a perpetual,
+ *       worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+ *       (except as stated in this section) patent license to make, have made,
+ *       use, offer to sell, sell, import, and otherwise transfer the Work,
+ *       where such license applies only to those patent claims licensable
+ *       by such Contributor that are necessarily infringed by their
+ *       Contribution(s) alone or by combination of their Contribution(s)
+ *       with the Work to which such Contribution(s) was submitted. If You
+ *       institute patent litigation against any entity (including a
+ *       cross-claim or counterclaim in a lawsuit) alleging that the Work
+ *       or a Contribution incorporated within the Work constitutes direct
+ *       or contributory patent infringement, then any patent licenses
+ *       granted to You under this License for that Work shall terminate
+ *       as of the date such litigation is filed.
+ *
+ *    4. Redistribution. You may reproduce and distribute copies of the
+ *       Work or Derivative Works thereof in any medium, with or without
+ *       modifications, and in Source or Object form, provided that You
+ *       meet the following conditions:
+ *
+ *       (a) You must give any other recipients of the Work or
+ *           Derivative Works a copy of this License; and
+ *
+ *       (b) You must cause any modified files to carry prominent notices
+ *           stating that You changed the files; and
+ *
+ *       (c) You must retain, in the Source form of any Derivative Works
+ *           that You distribute, all copyright, patent, trademark, and
+ *           attribution notices from the Source form of the Work,
+ *           excluding those notices that do not pertain to any part of
+ *           the Derivative Works; and
+ *
+ *       (d) If the Work includes a "NOTICE" text file as part of its
+ *           distribution, then any Derivative Works that You distribute must
+ *           include a readable copy of the attribution notices contained
+ *           within such NOTICE file, excluding those notices that do not
+ *           pertain to any part of the Derivative Works, in at least one
+ *           of the following places: within a NOTICE text file distributed
+ *           as part of the Derivative Works; within the Source form or
+ *           documentation, if provided along with the Derivative Works; or,
+ *           within a display generated by the Derivative Works, if and
+ *           wherever such third-party notices normally appear. The contents
+ *           of the NOTICE file are for informational purposes only and
+ *           do not modify the License. You may add Your own attribution
+ *           notices within Derivative Works that You distribute, alongside
+ *           or as an addendum to the NOTICE text from the Work, provided
+ *           that such additional attribution notices cannot be construed
+ *           as modifying the License.
+ *
+ *       You may add Your own copyright statement to Your modifications and
+ *       may provide additional or different license terms and conditions
+ *       for use, reproduction, or distribution of Your modifications, or
+ *       for any such Derivative Works as a whole, provided Your use,
+ *       reproduction, and distribution of the Work otherwise complies with
+ *       the conditions stated in this License.
+ *
+ *    5. Submission of Contributions. Unless You explicitly state otherwise,
+ *       any Contribution intentionally submitted for inclusion in the Work
+ *       by You to the Licensor shall be under the terms and conditions of
+ *       this License, without any additional terms or conditions.
+ *       Notwithstanding the above, nothing herein shall supersede or modify
+ *       the terms of any separate license agreement you may have executed
+ *       with Licensor regarding such Contributions.
+ *
+ *    6. Trademarks. This License does not grant permission to use the trade
+ *       names, trademarks, service marks, or product names of the Licensor,
+ *       except as required for reasonable and customary use in describing the
+ *       origin of the Work and reproducing the content of the NOTICE file.
+ *
+ *    7. Disclaimer of Warranty. Unless required by applicable law or
+ *       agreed to in writing, Licensor provides the Work (and each
+ *       Contributor provides its Contributions) on an "AS IS" BASIS,
+ *       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ *       implied, including, without limitation, any warranties or conditions
+ *       of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+ *       PARTICULAR PURPOSE. You are solely responsible for determining the
+ *       appropriateness of using or redistributing the Work and assume any
+ *       risks associated with Your exercise of permissions under this License.
+ *
+ *    8. Limitation of Liability. In no event and under no legal theory,
+ *       whether in tort (including negligence), contract, or otherwise,
+ *       unless required by applicable law (such as deliberate and grossly
+ *       negligent acts) or agreed to in writing, shall any Contributor be
+ *       liable to You for damages, including any direct, indirect, special,
+ *       incidental, or consequential damages of any character arising as a
+ *       result of this License or out of the use or inability to use the
+ *       Work (including but not limited to damages for loss of goodwill,
+ *       work stoppage, computer failure or malfunction, or any and all
+ *       other commercial damages or losses), even if such Contributor
+ *       has been advised of the possibility of such damages.
+ *
+ *    9. Accepting Warranty or Additional Liability. While redistributing
+ *       the Work or Derivative Works thereof, You may choose to offer,
+ *       and charge a fee for, acceptance of support, warranty, indemnity,
+ *       or other liability obligations and/or rights consistent with this
+ *       License. However, in accepting such obligations, You may act only
+ *       on Your own behalf and on Your sole responsibility, not on behalf
+ *       of any other Contributor, and only if You agree to indemnify,
+ *       defend, and hold each Contributor harmless for any liability
+ *       incurred by, or claims asserted against, such Contributor by reason
+ *       of your accepting any such warranty or additional liability.
+ *
+ *    END OF TERMS AND CONDITIONS
+ *
+ *    APPENDIX: How to apply the Apache License to your work.
+ *
+ *       To apply the Apache License to your work, attach the following
+ *       boilerplate notice, with the fields enclosed by brackets "{}"
+ *       replaced with your own identifying information. (Don't include
+ *       the brackets!)  The text should be enclosed in the appropriate
+ *       comment syntax for the file format. We also recommend that a
+ *       file or class name and description of purpose be included on the
+ *       same "printed page" as the copyright notice for easier
+ *       identification within third-party archives.
+ *
+ *    Copyright {yyyy} {name of copyright owner}
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        https://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+package ai.samepage.service.impl;
+
+import ai.samepage.common.core.base.entity.UserContext;
+import ai.samepage.common.core.exception.BusinessException;
+import ai.samepage.common.core.resp.RespCode;
+import ai.samepage.common.core.util.JacksonUtils;
+import ai.samepage.constant.Constants;
+import ai.samepage.entity.BotTypeEnum;
+import ai.samepage.entity.BotInfo;
+import ai.samepage.model.dto.FeatureConfigDTO;
+import ai.samepage.service.ForwardService;
+import ai.samepage.service.BotService;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import io.reactivex.rxjava3.core.Single;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
+import okhttp3.internal.http.HttpMethod;
+import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+
+@Slf4j
+@Service
+public class ForwardServiceImpl implements ForwardService {
+
+    @Resource
+    private BotService botService;
+
+    @Override
+    public void forward(String botId,
+                        String path, HttpServletRequest request,
+                        HttpServletResponse response,
+                        UserContext userContext) throws IOException {
+        long start = System.currentTimeMillis();
+        request(getServerUrl(botId, userContext), path, userContext, request, null, null, response);
+        log.info("转发{}话费的时间:{}", path, System.currentTimeMillis() - start);
+    }
+
+    private FeatureConfigDTO getServerUrl(String id, UserContext userContext) throws UnknownHostException {
+        Long userId = userContext.getUserId();
+        Integer tenantId = userContext.getTenantId();
+        BotInfo botInfo = botService.selectByKey(id, tenantId, userId);
+        if (!Objects.equals(botInfo.getType(), BotTypeEnum.external_bot)) {
+            throw new BusinessException(
+                    RespCode.INTERNAL_SERVER_ERROR, "该应用不支持外部链接应用"
+            );
+        }
+        String featureConfig = botInfo.getFeatureConfig();
+        if (StrUtil.isBlank(featureConfig)) {
+            throw new BusinessException(
+                    RespCode.INTERNAL_SERVER_ERROR, "未发现转发配置"
+            );
+        }
+        List<FeatureConfigDTO> config = JacksonUtils.readValueAsList(featureConfig, FeatureConfigDTO.class);
+        FeatureConfigDTO conf = null;
+        for (FeatureConfigDTO configDTO : config) {
+            if (Objects.equals(Constants.EXTERNAL_LINK_FEATURE_KEY,
+                    configDTO.getFeature())) {
+                conf = configDTO;
+                break;
+            }
+        }
+        if (Objects.isNull(conf)) {
+            throw new BusinessException(RespCode.INTERNAL_SERVER_ERROR, "未发现配置信息");
+        }
+        String serverUrl = conf.getServerUrl();
+        if (StrUtil.isBlank(serverUrl)) {
+            throw new BusinessException(RespCode.INTERNAL_SERVER_ERROR, "获取不到");
+        }
+        return conf;
+    }
+
+    @Override
+    public void forward(String id, String path,
+                        HttpServletRequest request,
+                        HttpServletResponse response,
+                        Map<String, String> formData,
+                        MultipartFile file,
+                        UserContext userContext) throws IOException {
+        request(getServerUrl(id, userContext), path, userContext, request, formData, file, response);
+    }
+
+    private static final OkHttpClient OK_HTTP_CLIENT;
+
+
+    private static final Map<String, List<InetAddress>> DNS = Maps.newConcurrentMap();
+
+    static {
+        OK_HTTP_CLIENT = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectionPool(new ConnectionPool(2000, 10, TimeUnit.MINUTES))
+                .dns(hostname -> {
+                    List<InetAddress> inetAddresses = DNS.get(hostname);
+                    if (CollectionUtil.isEmpty(inetAddresses)) {
+                        return Dns.SYSTEM.lookup(hostname);
+                    }
+                    log.info("开始使用其他的dns:{}->{}", hostname, inetAddresses);
+                    return inetAddresses;
+
+                })
+                .protocols(Collections.singletonList(Protocol.HTTP_1_1))
+                .build();
+    }
+
+    List<String> RESPONSE_HEADERS = Arrays.asList(
+            HttpHeaders.CONTENT_LENGTH,
+            HttpHeaders.CONTENT_TYPE,
+            HttpHeaders.CONTENT_ENCODING,
+            HttpHeaders.CONTENT_RANGE,
+            HttpHeaders.CONTENT_LANGUAGE,
+            HttpHeaders.CONTENT_DISPOSITION
+    );
+
+    private static final String DEFAULT_ALG = "DES";
+
+    private void request(FeatureConfigDTO conf,
+                         String path,
+                         UserContext userContext,
+                         HttpServletRequest request,
+                         Map<String, String> formData, MultipartFile file,
+                         HttpServletResponse servletResponse) throws IOException {
+        //
+        String serverUrl = conf.getServerUrl();
+        String domainName = conf.getDomainName();
+        String ip = conf.getIp();
+        if (StrUtil.isNotBlank(domainName)
+                && StrUtil.isNotBlank(ip) && !DNS.containsKey(domainName)) {
+            DNS.put(domainName, Collections.singletonList(InetAddress.getByName(ip)));
+        }
+        if (!path.startsWith("/")) {
+            path = "/" + path;
+        }
+        Request.Builder builder = new Request.Builder();
+        Enumeration<String> enumeration = request.getParameterNames();
+        List<String> params = Lists.newArrayList();
+        while (enumeration.hasMoreElements()) {
+            String name = enumeration.nextElement();
+            params.add(StrUtil.format("{}={}", name, request.getParameter(name)));
+        }
+        if (CollectionUtil.isNotEmpty(params)) {
+            path = path + "?" + StrUtil.join("&", params);
+        }
+        builder.url(serverUrl + path);
+        // 设置header
+       /* Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String s = headerNames.nextElement();
+            builder.addHeader(s, request.getHeader(s));
+        }*/
+        // 设置用户信息
+        Long userId = userContext.getUserId();
+        builder.addHeader("user-id", String.valueOf(userId));
+        builder.addHeader("mail", userContext.getMail());
+        //Integer tenantId = userContext.getTenantId();
+       /* if (!Objects.equals(tenantId, DEFAULT_CORP_ID)) {
+            builder.addHeader("tenant-name", userContext.getTenantName());
+            builder.addHeader("tenant-id", String.valueOf(tenantId));
+        }*/
+        String alg = conf.getAlg();
+        if (StrUtil.isBlank(alg)) {
+            alg = DEFAULT_ALG;
+        } else {
+            alg = alg.toUpperCase();
+        }
+        String secretKey = conf.getSecretKey();
+        if (StrUtil.isNotBlank(secretKey)) {
+            builder.addHeader("Algorithm", alg);
+            long time = System.currentTimeMillis();
+            builder.addHeader("Date", String.valueOf(time));
+            String value = StrUtil.format("{}_{}", userId, time);
+            // 创建对称加密对象
+            SymmetricCrypto des = new SymmetricCrypto(SymmetricAlgorithm.valueOf(alg), secretKey.getBytes());
+            // 加密数据
+            String signature = des.encryptHex(value);
+            builder.addHeader("Signature", signature);
+            log.info("Signature:{},alg:{}", signature, alg);
+        }
+        RequestBody requestBody = null;
+        if (CollectionUtil.isNotEmpty(formData) || Objects.nonNull(file)) {
+            // 创建多部分的请求体，用于文件上传
+            MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            // 添加表单字段
+            for (Map.Entry<String, String> entry : formData.entrySet()) {
+                multipartBuilder.addFormDataPart(entry.getKey(), entry.getValue());
+            }
+            // 添加文件
+            if (file != null && !file.isEmpty()) {
+                MediaType mediaType = MediaType.parse(Objects.requireNonNull(file.getContentType()));
+                multipartBuilder.addFormDataPart(
+                        "file", // 这里的 "file" 是表单中文件字段的名称
+                        file.getOriginalFilename(),
+                        RequestBody.create(mediaType, file.getBytes())
+                );
+            }
+            requestBody = multipartBuilder.build();
+        } else {
+            BufferedReader reader = request.getReader();
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while (Objects.nonNull(line = reader.readLine())) {
+                sb.append(line);
+            }
+            if (sb.length() > 0) {
+                requestBody = RequestBody.create(MediaType.parse(request.getContentType()), sb.toString());
+            }
+
+        }
+
+        if (Objects.nonNull(requestBody)) {
+            builder.method(request.getMethod(), requestBody);
+        } else {
+            if (HttpMethod.requiresRequestBody(request.getMethod())) {
+                builder.method(request.getMethod(),
+                        RequestBody.create(MediaType.parse(request.getContentType()), StrUtil.EMPTY));
+            } else {
+                builder.method(request.getMethod(), null);
+            }
+
+        }
+        Request req = builder.build();
+        log.info("转发的method:{},url:{},header:{}", request.getMethod(),
+                serverUrl + path, req.headers().toMultimap());
+        try (Response response = Single.fromCallable(() -> OK_HTTP_CLIENT.newCall(req).execute()).blockingGet()) {
+            if (response.isRedirect()) {
+                throw new BusinessException(RespCode.INTERNAL_SERVER_ERROR, "不支持转发redirect 接口");
+            }
+            servletResponse.setStatus(response.code());
+            log.info("返回结果的状态：{}", response.code());
+            for (String responseHeader : RESPONSE_HEADERS) {
+                String value = response.header(responseHeader);
+                if (StrUtil.isNotBlank(value)) {
+                    log.info("返回头信息：{}->{}", responseHeader, value);
+                    servletResponse.addHeader(responseHeader, value);
+                }
+            }
+            servletResponse.setContentType(response.header(HttpHeaders.CONTENT_TYPE));
+            if (response.isSuccessful()) {
+                // 获取状态信息
+                ResponseBody responseBody = response.body();
+                if (Objects.nonNull(responseBody)) {
+                    servletResponse.setContentType(Objects.requireNonNull(responseBody.contentType()).toString());
+                    servletResponse.setContentLengthLong(responseBody.contentLength());
+                    StreamUtils.copy(responseBody.byteStream(), servletResponse.getOutputStream());
+                }
+            }
+        }
+    }
+}

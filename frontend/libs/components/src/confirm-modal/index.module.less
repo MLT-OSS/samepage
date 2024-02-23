@@ -1,0 +1,79 @@
+.confirm-tip-modal {
+    :global {
+        .ant-modal-close {
+            display: none;
+        }
+
+        .ant-modal-body {
+            padding: 0;
+        }
+
+        .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
+            margin: 0;
+        }
+
+        .ant-modal-confirm-body > .anticon {
+            display: none;
+        }
+
+        .ant-modal-footer,
+        .ant-modal-confirm-btns {
+            display: flex;
+            justify-content: flex-end;
+            height: 72px;
+            padding: 16px;
+            margin: 0;
+            border: none;
+
+            .ant-btn {
+                width: 80px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                font-size: 13px;
+                font-weight: 500;
+                padding: 0;
+
+                & + .ant-btn {
+                    margin-left: 16px;
+                }
+
+                &.ant-btn-primary {
+                    background-color: #7171ee;
+                    border: none;
+
+                    &:hover {
+                        background-color: rgba(113, 113, 238, 0.9);
+                    }
+                }
+
+                &.ant-btn-default {
+                    background-color: rgba(113, 113, 238, 0.1);
+                    border: none;
+                    color: #7171ee;
+
+                    &:hover {
+                        background-color: rgba(113, 113, 238, 0.08);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.title {
+    height: 56px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 56px;
+    color: rgba(0, 0, 0, 0.75);
+    text-align: center;
+}
+
+.content {
+    padding: 16px 16px 40px;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.75);
+    text-align: center;
+}

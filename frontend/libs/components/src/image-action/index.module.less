@@ -1,0 +1,28 @@
+.image-action {
+    display: flex;
+    color: #fff;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 60%);
+    cursor: pointer;
+
+    .action {
+        padding: 3px 9px;
+    }
+
+    .action:nth-child(1) {
+        border-radius: 4px 0 0 4px;
+    }
+
+    .action:not(:last-child) {
+        border-right: 1px solid rgba(255, 255, 255, 60%);
+    }
+
+    .action:last-child {
+        border-radius: 0 4px 4px 0;
+    }
+
+    .action:hover {
+        color: #7171ee;
+        background: rgba(0, 0, 0, 100%);
+    }
+}

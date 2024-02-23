@@ -1,0 +1,94 @@
+.stateless-conversation {
+    background-color: rgba(113, 113, 238, 10%);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow-y: hidden;
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .__xm_test__ {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #7171ee;
+        color: #fff;
+        font-weight: 600;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        right: 10px;
+        bottom: 200px;
+        z-index: 1;
+        cursor: pointer;
+    }
+
+    .chats {
+        position: relative;
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 0 16px;
+        padding-bottom: 24px;
+
+        .title {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0 10px;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.4;
+
+            .icon {
+                font-size: 16px;
+                margin-right: 4px;
+            }
+        }
+
+        .chat-item-wapper {
+            margin-bottom: 12px;
+
+            .doing-no-image-url-item {
+                display: inline-block;
+                padding: 8px;
+                margin-bottom: 8px;
+                background-color: #fff;
+                border-radius: 6px;
+            }
+
+            .error-reason {
+                margin-top: 4px;
+                color: #f00;
+            }
+        }
+
+        .last {
+            height: 1px;
+        }
+    }
+
+    .stop {
+        position: absolute;
+        right: 16px;
+        top: -46px;
+        display: inline-flex;
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 10%);
+        padding: 4px 8px;
+        color: #7171ee;
+        cursor: pointer;
+        font-size: 13px;
+        border-radius: 4px;
+        line-height: 22px;
+        border: 1px solid rgba(113, 113, 238, 2%0);
+        background: #fff;
+
+        .icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        &:hover {
+            background: #f1f1fc;
+        }
+    }
+}

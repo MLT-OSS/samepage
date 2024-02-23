@@ -1,0 +1,107 @@
+.conversation {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow-y: hidden;
+
+    :global {
+        .ant-btn {
+            height: 26px;
+            padding: 1px 8px;
+            color: #7171ee;
+        }
+
+        .ant-btn-primary {
+            color: #fff;
+        }
+
+        .ant-btn-default {
+            border-color: rgba(113, 113, 238, 20%);
+        }
+
+        .ant-select-selector {
+            padding: 0 8px;
+            height: 26px !important;
+        }
+
+        .ant-select-selection-item {
+            line-height: 24px;
+            color: #7171ee;
+        }
+
+        .ant-btn-icon {
+            color: #7171ee;
+        }
+
+        .ant-btn-dangerous {
+            color: #f00;
+        }
+    }
+
+    .body {
+        position: relative;
+        padding: 16px;
+        flex-grow: 1;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+
+        &.show-float-actions {
+            padding-bottom: 56px;
+        }
+
+        .selection-actions {
+            margin-bottom: 8px;
+            text-align: right;
+
+            & > button {
+                margin-right: 4px;
+            }
+
+            :global {
+                .ant-btn-icon {
+                    margin-right: 4px;
+                }
+
+                .ant-btn-default {
+                    border-color: rgba(113, 113, 238, 20%);
+
+                    &:hover {
+                        background-color: rgba(113, 113, 238, 10%);
+                    }
+                }
+            }
+        }
+    }
+
+    .padding-bottom {
+        padding-bottom: 34px;
+    }
+
+    .stop-box {
+        margin-bottom: 16px;
+        text-align: right;
+        padding-right: 16px;
+
+        .stop {
+            display: inline-flex;
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 10%);
+            padding: 4px 8px;
+            color: #7171ee;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 4px;
+            line-height: 22px;
+            border: 1px solid rgba(113, 113, 238, 20%);
+
+            .icon {
+                font-size: 18px;
+                margin-right: 8px;
+            }
+
+            &:hover {
+                background: #f1f1fc;
+            }
+        }
+    }
+}

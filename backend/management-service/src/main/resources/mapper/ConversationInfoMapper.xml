@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ai.samepage.mapper.ConversationInfoMapper">
+    <resultMap id="BaseResultMap" type="ai.samepage.entity.ConversationInfo">
+        <result property="id" column="id"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="webUrl" column="web_url" jdbcType="VARCHAR"/>
+        <result property="model" column="model" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="TINYINT"/>
+        <result property="createId" column="create_id" jdbcType="BIGINT"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="lastMessageTime" column="last_message_time" jdbcType="TIMESTAMP"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+        <result property="docId" column="doc_id" jdbcType="VARCHAR"/>
+        <result property="threadId" column="thread_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        `id`,title,create_time,
+        update_time,web_url,model,`description`,
+        type,create_id,
+        last_message_time,is_deleted,doc_id,thread_id
+    </sql>
+    <insert id="save">
+        insert into ${convTable} (`id`, title, create_time,
+                                  update_time, web_url, model,
+                                  type, create_id, `description`,
+                                  last_message_time, is_deleted, doc_id, thread_id)
+            value (#{conv.id},
+                   #{conv.title},
+                   #{conv.createTime},
+                   #{conv.updateTime},
+                   #{conv.webUrl},
+                   #{conv.model},
+                   #{conv.type},
+                   #{conv.createId},
+                   #{conv.description},
+                   #{conv.lastMessageTime},
+                   #{conv.isDeleted},
+                   #{conv.docId},
+                   #{conv.threadId}
+            )
+    </insert>
+    <select id="list"
+            resultMap="BaseResultMap">
+        select
+        i.id as id,
+        i.title as title,
+        i.create_time as create_time,
+        i.update_time as update_time,
+        i.web_url as web_url, i.model as model,
+        i.type as type, i.create_id as create_id,
+        i.last_message_time as last_message_time,
+        i.is_deleted as is_deleted,
+        i.`description` as `description`,
+        i.doc_id as doc_id
+        from t_conversation_info i
+        where i.is_deleted = false
+        and i.create_id = #{userId}
+        and i.model = #{model}
+        <if test="keyword != null and keyword != ''">
+            and INSTR(i.title,#{keyword}) > 0
+        </if>
+        <if test="docId != null">
+            and i.doc_id = #{docId}
+        </if>
+        order by i.last_message_time desc ,i.id desc
+    </select>
+
+    <select id="get" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_conversation_info
+        where is_deleted = false
+        and id = #{id}
+        <if test="keyword != null and keyword != ''">
+            and exists (
+            select 1 from t_conversation_info info where
+            info.id = t_conversation_info.id
+            and INSTR(info.title,#{keyword}) > 0
+            )
+        </if>
+    </select>
+
+    <select id="getRecentConversationId" resultType="java.lang.Long">
+        select id
+        from t_conversation_info
+        where is_deleted = false
+          and create_id = #{userId}
+          and doc_id = #{docId}
+        order by create_time desc
+        limit 1
+    </select>
+
+    <select id="listConversation" resultMap="BaseResultMap">
+        select
+        i.id as id,
+        i.title as title,
+        i.create_time as create_time,
+        i.update_time as update_time,
+        i.web_url as web_url, i.model as model,
+        i.type as type, i.create_id as create_id,
+        i.last_message_time as last_message_time,
+        i.is_deleted as is_deleted,
+        i.`description` as `description`,
+        i.doc_id as doc_id
+        from
+        ${tableName} i
+        where i.is_deleted = false
+        and i.create_id = #{userId}
+        and i.model = #{botKey}
+        <if test="keyword != null and keyword != ''">
+            and exists (
+            select 1 from ${tableName} info where
+            info.id = i.id
+            and INSTR(info.title,#{keyword}) > 0
+            )
+        </if>
+        <if test="documentId != null">
+            and i.doc_id = #{documentId}
+        </if>
+        order by i.last_message_time desc ,i.id desc
+    </select>
+
+    <update id="updateTitle">
+        update
+            ${tableName}
+        set title        = #{title},
+            update_time  = #{updateTime}
+        where model = #{botKey}
+          and id = #{conversationId}
+          and create_id = #{userId}
+          and is_deleted = false
+        <if test="oldTitle != null and oldTitle != ''">
+            and title = #{oldTitle}
+        </if>
+    </update>
+
+    <select id="getConversationInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        ${tableName} info
+        where info.is_deleted = false
+        and info.id = #{id}
+        <if test="botKey != null and botKey != ''">
+            and info.model = #{botKey}
+        </if>
+
+        <if test="userId != null and userId != ''">
+            and info.create_id = #{userId}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and INSTR(info.title,#{keyword}) > 0
+        </if>
+    </select>
+
+    <update id="deleteConversation">
+        update ${tableName}
+            set is_deleted = true,update_time = #{updateTime}
+        where id = #{id}
+             and model = #{key}
+             and create_id = #{userId}
+    </update>
+    <update id="updateDesc">
+        update ${tableName}
+        set
+        <if test="desc != null and desc != ''">
+            `description` = #{desc},
+        </if>
+        <if test="title != null and title != ''">
+            title = #{title},
+        </if>
+        update_time = #{updateTime},
+        last_message_time = #{updateTime}
+        where id = #{convId}
+        and model = #{model}
+        and create_id = #{userId}
+    </update>
+
+    <select id="getConvInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where id = #{convId}
+        <if test="key != null and key != ''">
+            and model = #{key}
+        </if>
+        and is_deleted = false
+        and create_id = #{userId}
+    </select>
+
+    <update id="updateThreadId">
+        update ${tableName}
+        set thread_id   = #{threadId},
+            update_time = now(),
+            type        = 3
+        where id = #{id}
+    </update>
+</mapper>

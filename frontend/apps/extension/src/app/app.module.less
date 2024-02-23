@@ -1,0 +1,25 @@
+/* Your styles goes here. */
+.container {
+    position: relative;
+    z-index: 2147483647;
+}
+
+.main {
+    width: 464px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9998;
+    background: #fff;
+    box-shadow: -4px 0 20px 0 rgba(0, 0, 0, 5%);
+    display: flex;
+    flex-direction: column;
+
+    :global {
+        /* stylelint-disable-next-line no-invalid-position-at-import-rule */
+        @import url('~@/common/styles/antd-reset.less');
+        /* stylelint-disable-next-line no-invalid-position-at-import-rule */
+        @import url('~@/common/styles/global.less');
+    }
+}

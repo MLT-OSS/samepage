@@ -1,0 +1,27 @@
+# Add files here to ignore them from prettier formatting
+/dist
+/coverage
+/ytt-type
+**/*.svg
+package.json
+.dockerignore
+.DS_Store
+.eslintignore
+*.png
+*.toml
+docker
+.editorconfig
+Dockerfile*
+.gitignore
+.prettierignore
+LICENSE
+.eslintcache
+*.lock
+yarn-error.log
+.history
+CNAME
+CubeSL*
+*.md
+pnpm-lock.yaml
+deploy/*
+*.yml

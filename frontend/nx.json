@@ -1,0 +1,125 @@
+{
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/test-setup.[jt]s",
+      "!{projectRoot}/.stylelintrc(.(json|yml|yaml|js))?"
+    ],
+    "sharedGlobals": [],
+    "envs": [
+      {
+        "runtime": "if [ -f .env ]; then cat .env; fi"
+      }
+    ],
+    "envsDevelopment": [
+      {
+        "runtime": "if [ -f .development.env ]; then cat .development.env; fi"
+      }
+    ],
+    "envsBuildDevelopment": [
+      {
+        "runtime": "if [ -f .build.development.env ]; then cat .build.development.env; fi"
+      }
+    ],
+    "envsTest": [
+      {
+        "runtime": "if [ -f .test.env ]; then cat .test.env; fi"
+      }
+    ],
+    "envsBuildTest": [
+      {
+        "runtime": "if [ -f .build.test.env ]; then cat .build.test.env; fi"
+      }
+    ],
+    "envsProduction": [
+      {
+        "runtime": "if [ -f .production.env ]; then cat .production.env; fi"
+      }
+    ],
+    "envsBuildProduction": [
+      {
+        "runtime": "if [ -f .build.production.env ]; then cat .build.production.env; fi"
+      }
+    ]
+  },
+  "targetDefaults": {
+    "build": {
+      "inputs": [
+        "production",
+        "^production",
+        "envsDevelopment",
+        "^envsDevelopment",
+        "envsBuildDevelopment",
+        "^envsBuildDevelopment",
+        "envsBuildTest",
+        "^envsBuildTest",
+        "envsBuildTest",
+        "^envsBuildTest",
+        "envsProduction",
+        "^envsProduction",
+        "envsBuildProduction",
+        "^envsBuildProduction"
+      ]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.js",
+        "!{projectRoot}/webpack.config.js"
+      ]
+    },
+    "test": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "inputs": ["default", "{workspaceRoot}/.stylelintrc(.(json|yml|yaml|js))?"],
+      "options": {
+        "lintFilePatterns": ["{projectRoot}/**/*.css", "{projectRoot}/**/*.less"]
+      }
+    }
+  },
+  "workspaceLayout": {
+    "projectNameAndRootFormat": "as-provided"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "test", "e2e", "stylelint"],
+        "cacheDirectory": "./tmp/xm-cache"
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "style": "less",
+        "linter": "eslint",
+        "bundler": "webpack",
+        "babel": true
+      },
+      "component": {
+        "style": "less"
+      },
+      "library": {
+        "style": "less",
+        "linter": "eslint",
+        "unitTestRunner": "none"
+      }
+    }
+  }
+}

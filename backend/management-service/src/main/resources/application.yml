@@ -1,0 +1,125 @@
+spring:
+  profiles:
+    active: prod
+  main:
+    allow-circular-references: true
+  servlet:
+    multipart:
+      # 是否开启springMVC 多部分上传功能(默认开启)
+      enabled: true
+      # 上传单个文件大小(默认是1MB)
+      max-file-size: 1024MB
+      # 限制所有文件大小
+      max-request-size: 1024MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/samepage?useAffectedRows=true
+    username: root
+    password: samepage.ai
+    hikari:
+      maximum-pool-size: 10
+      connection-init-sql: 'SELECT 1'
+  redis:
+    database: 1
+    timeout: 10000
+    host: localhost
+    port: 6379
+    password: samepage123456
+  thymeleaf:
+    cache: true
+    mode: HTML #类型
+    prefix: classpath:templates/ #模板存放的位置
+    suffix: .html #模板的后缀
+  # 邮件配置
+  mail:
+    port: 465
+    # 编码格式
+    default-encoding: utf-8
+    # 协议
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    protocol: smtp
+    host:
+    password:
+    username:
+mail:
+  code:
+    from:
+login:
+  session:
+    active: true
+    maxInterval: 604800
+    multiDomain: false
+server:
+  port: 8089
+  compression:
+    min-response-size: 1024
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/plain,text/css,application/x-javascript
+
+s3:
+  # 文档对象存储服务配置
+  document:
+    download:
+      expireSecond: 900
+    upload:
+      expireSecond: 900
+    endpoint: http://minio:9001/
+    bucketName: samepage-s3-paper
+    accessKey: minioadmin
+    secretKey: minioadmin
+    internalEndpoint: http://minio:9001/
+    region: myregion
+  # 图片
+  picture:
+    endpoint: http://minio:9001/
+    bucketName: samepage-s3-paper
+    accessKey: minioadmin
+    secretKey: minioadmin
+    region: myregion
+
+sys:
+  welcome: 欢迎回来！您想聊些什么？
+  gpt3Limit: 1200
+  gpt4Limit: 120
+  summary-pool:
+    corePoolSize: 10
+    maxPoolSize: 15
+    queueCapacity: 10
+  pool:
+    corePoolSize: 20
+    maxPoolSize: 30
+    queueCapacity: 40
+  rewriteUserPrompt:
+    - "基于上文，将上面的问题改写成一个独立的问题，问题必须按照下面4点进行改写："
+    - "1. 不回答和不解释上面的问题"
+    - "2. 有指代词时，将其改写成具体的人或者物"
+    - "3. 如果没有改写内容，则回复上面问题"
+    - "4. 回复的格式是：问题：xxx"
+  intent-prompt:
+    - key: "概括这段文字。"
+      value: "Condense the text in #{lang}.  The text is '{}' "
+    - key: "重新表述这段文字。"
+      value: "Re-describe the text in #{lang}. The text is '{}' "
+    - key: "回答这个问题。"
+      value: "Answer the question in #{lang}. The question is '{}' "
+    - key: "详细说明这段文字。"
+      value: "Expands the text and view detailed information in #{lang}. The text is '{}' "
+    - key: "将这段文字翻译成 当前浏览器语言。"
+      value: "Translate the text to #{lang}. The text is '{}' "
+llm:
+  timeout:
+  baseUrl:
+  token:
+  assistantBaseUrl:
+  assistantToken:
+
+
+

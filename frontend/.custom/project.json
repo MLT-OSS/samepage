@@ -1,0 +1,53 @@
+{
+  "name": "custom-plugins",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": ".custom/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/.custom",
+        "main": ".custom/src/index.ts",
+        "tsConfig": ".custom/tsconfig.lib.json",
+        "assets": [
+          ".custom/*.md",
+          {
+            "input": "./.custom/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./.custom/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./.custom",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./.custom",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          ".custom/**/*.ts",
+          ".custom/package.json",
+          ".custom/executors.json",
+          ".custom/generators.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

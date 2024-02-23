@@ -1,0 +1,26 @@
+.image-progress {
+    display: flex;
+    justify-content: flex-start;
+    color: #7171ee;
+    font-weight: 600;
+
+    @keyframes loading {
+        0% {
+            rotate: 0;
+        }
+
+        50% {
+            rotate: 180deg;
+        }
+
+        100% {
+            rotate: 360deg;
+        }
+    }
+
+    .icon {
+        font-size: 16px;
+        margin-right: 8px;
+        animation: loading 1s linear infinite;
+    }
+}
