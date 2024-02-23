@@ -1,0 +1,37 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/assets/*": ["common/assets/*"],
+      "@/common/*": ["common/*"],
+      "@/constants": ["constants/src/index.ts"],
+      "@/types": ["types/index.d.ts"],
+      "@/utils": ["utils/src/index.ts"],
+      "@/ytt-type/*": ["ytt-type/*"],
+      "@xm/components": ["libs/components/src/index.ts"],
+      "@xm/configs": ["configs/src/index.ts"],
+      "@xm/containers": ["libs/containers/src/index.ts"],
+      "@xm/context": ["context/src/index.ts"],
+      "@xm/custom-plugins": [".custom/src/index.ts"],
+      "@xm/hooks": ["hooks/src/index.ts"],
+      "@xm/packages": ["libs/packages/src/index.ts"],
+      "@xm/permission": ["permission/src/index.ts"],
+      "@xm/services": ["services/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp", "ytt-type"]
+}

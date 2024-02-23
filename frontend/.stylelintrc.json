@@ -1,0 +1,21 @@
+{
+  "ignoreFiles": ["**/*"],
+  "overrides": [
+    {
+      "files": ["**/*.css", "**/*.less"],
+      "customSyntax": "postcss-less",
+      "extends": ["stylelint-config-standard", "stylelint-config-css-modules"],
+      "rules": {
+        "block-no-empty": null,
+        "no-descending-specificity": null,
+        "function-url-quotes": "always",
+        "color-function-notation": "legacy",
+        "length-zero-no-unit": null,
+        "alpha-value-notation": null,
+        "no-empty-source": null,
+        "no-missing-end-of-source-newline": null
+      }
+    }
+  ],
+  "rules": {}
+}

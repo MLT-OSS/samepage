@@ -1,0 +1,14 @@
+<svg className="icon collapse-bg" width="1em" height="1em" fill="none" viewBox="0 0 16 88">
+    <g>
+        <path
+            data-follow-fill="currentColor"
+            fill="currentColor"
+            d="m0 0 14.266 9.808A4 4 0 0 1 16 13.104v61.792a4 4 0 0 1-1.734 3.296L0 88V0Z"
+        />
+        <path
+            strokeOpacity=".16"
+            stroke="#919EAB"
+            d="M.5 87.05V.95l13.483 9.27a3.5 3.5 0 0 1 1.517 2.884v61.792a3.5 3.5 0 0 1-1.517 2.884L.5 87.05Z"
+        />
+    </g>
+</svg>

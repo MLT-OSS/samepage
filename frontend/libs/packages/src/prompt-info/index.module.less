@@ -1,0 +1,118 @@
+.cue-word-modal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    :global {
+        .type {
+            width: 100%;
+            margin-bottom: 0;
+            color: rgba(0, 0, 0, 0.75);
+            font-size: 12px;
+            line-height: 1.4;
+            float: left;
+        }
+
+        .p-style {
+            color: rgba(0, 0, 0, 0.75);
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            float: left;
+        }
+
+        #prompt-info {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .form-button {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+
+            .info {
+                color: rgba(0, 0, 0, 0.55);
+                font-size: 12px;
+                align-items: center;
+
+                .icon {
+                    font-size: 14px;
+                    margin-right: 2px;
+                }
+            }
+        }
+
+        .input-tooltip-icon {
+            float: right;
+            padding-right: 2px;
+            margin-top: -3px;
+        }
+
+        .input-tooltip-icon:hover {
+            color: #7171ee;
+        }
+
+        .input-tooltip {
+            float: right;
+            color: rgba(0, 0, 0, 0.55);
+            font-size: 12px;
+        }
+
+        .input-style {
+            // margin-bottom: 16px;
+        }
+
+        .ant-modal .ant-modal-header {
+            margin-bottom: 0;
+        }
+
+        .ant-modal-content {
+            padding: 14px 16px 16px;
+        }
+
+        .ant-modal-footer {
+            margin-top: 0;
+        }
+    }
+}
+
+.modal-content {
+    :global {
+        .ant-modal-content {
+            padding: 18px 16px 0;
+        }
+    }
+}
+
+.save {
+    font-weight: 600;
+    margin-left: 16px;
+}
+
+.cancel {
+    color: #7171ee;
+    border: none;
+    font-weight: 600;
+    background-color: rgba(113, 113, 238, 0.1);
+
+    &:hover {
+        background-color: rgba(113, 113, 238, 0.3);
+    }
+}
+
+.del {
+    font-weight: 600;
+
+    &:hover {
+        background-color: rgba(255, 0, 0, 0.1);
+    }
+}

@@ -1,0 +1,220 @@
+.float-actions {
+    position: absolute;
+    height: 40px;
+    top: -56px;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 32px);
+
+    .search-tips {
+        position: absolute;
+        top: -40px;
+        height: 32px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .text {
+            color: #fff;
+            font-style: normal;
+            font-weight: 500;
+            display: inline-flex;
+            padding: 4px 8px;
+            line-height: 32px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            background: rgba(51, 51, 51, 0.7);
+        }
+    }
+
+    .web-search {
+        height: 32px;
+        box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05);
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        margin-right: 12px;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 0 8px;
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 3px;
+        }
+    }
+
+    .web-search-open {
+        color: #7171ee;
+    }
+
+    .web-search-close {
+        color: #cecece;
+    }
+
+    .base-float-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.05);
+        background-color: #fff;
+        border: 1px solid rgba(239, 236, 246, 1);
+        cursor: pointer;
+        margin-right: 16px;
+
+        &:hover {
+            background: #f1f1fd;
+        }
+    }
+
+    .base-float-action-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        min-width: 40px;
+        font-size: 18px;
+    }
+
+    .base-read-page-text {
+        color: #7171ee;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .read-page {
+        .base-float-action();
+
+        width: 42px;
+        transition: all 0.4s ease;
+
+        .icon {
+            .base-float-action-icon();
+        }
+
+        .text {
+            .base-read-page-text();
+
+            display: none;
+            padding-right: 10px;
+            transition: all 0.4s ease;
+        }
+
+        &:hover {
+            width: auto;
+
+            .text {
+                display: inline-block;
+            }
+        }
+    }
+
+    .read-page-expand {
+        .base-float-action();
+
+        border-radius: 20px;
+
+        .icon {
+            .base-float-action-icon();
+        }
+
+        .text {
+            .base-read-page-text();
+
+            padding-right: 10px;
+        }
+    }
+
+    .task-loading {
+        .base-float-action();
+
+        border-color: #fff;
+        padding-left: 12px;
+        padding-right: 1px;
+
+        .icon {
+            font-size: 14px;
+            margin-right: 8px;
+        }
+
+        .text {
+            .base-read-page-text();
+        }
+    }
+
+    .read-doc {
+        .base-float-action();
+
+        width: 42px;
+
+        .icon {
+            .base-float-action-icon();
+        }
+    }
+
+    .btn {
+        margin-right: 12px;
+        height: 32px;
+        line-height: 32px;
+        border-color: #7171ee;
+        display: inline-flex;
+        align-items: center;
+
+        :global {
+            .anticon + span {
+                margin-inline-start: 4px;
+            }
+        }
+
+        .icon {
+            font-size: 16px;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            background-color: rgba(113, 113, 238, 0.1);
+        }
+    }
+
+    .stop-box {
+        flex: 1;
+        text-align: right;
+
+        .stop {
+            display: inline-flex;
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
+            padding: 4px 8px;
+            color: #7171ee;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 4px;
+            line-height: 22px;
+            border: 1px solid rgba(113, 113, 238, 0.2);
+            background: #fff;
+
+            .icon {
+                font-size: 18px;
+                margin-right: 8px;
+            }
+
+            &:hover {
+                background: #f1f1fc;
+            }
+        }
+    }
+}
+
+.h5-float-actions {
+    padding-left: 6px;
+    top: -48px;
+}

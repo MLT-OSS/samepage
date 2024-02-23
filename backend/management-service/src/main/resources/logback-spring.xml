@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<configuration scan="true" scanPeriod="10 seconds">-->
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <contextName>logback</contextName>
+    <!-- 排除打印内容 start-->
+    <!--包 -->
+    <!--<logger name="org.elasticsearch.deprecation.search.aggregations.bucket.histogram" level="OFF"/>
+    &lt;!&ndash;类&ndash;&gt;
+    <logger name="org.elasticsearch.deprecation.search.aggregations.bucket.histogram.DateHistogramAggregationBuilder"
+            level="OFF"/>
+    &lt;!&ndash;方法&ndash;&gt;
+    <logger name="org.elasticsearch.deprecation.search.aggregations.bucket.histogram.DateHistogramAggregationBuilder.dateHistogramInterval"
+            level="OFF"/>-->
+    <!--  "end" -->
+    <!-- 此处定义全局变量，可以用引用application-env.yml中配置的变量 -->
+    <springProperty scop="context" name="logLevel" source="logging.level.root" defaultValue="INFO"/>
+    <!-- 自定义日志文件名前缀，默认log,也可以在Pattern配置使用时间作为文件前缀-->
+    <springProperty scop="context" name="baseFileName" source="logging.config.baseName" defaultValue="log"/>
+    <!-- 日志输出基础路径，默认输出到当前工程目录/logs，可以在application-env.yml中配置 -->
+    <springProperty scop="context" name="basePath" source="logging.config.basePath" defaultValue="logs/"/>
+    <!-- 日志文件单个文件最大限制，默认100MB-->
+    <springProperty scop="context" name="maxFileSize" source="logging.config.maxFileSize" defaultValue="100MB"/>
+    <!-- 日志文件最大保留时间，默认30天-->
+    <springProperty scop="context" name="maxHistory" source="logging.config.maxHistory" defaultValue="7"/>
+    <!-- 默认输出样式 -->
+    <property name="pattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level transactionId=[%X{transaction.id}] traceId=[%X{trace.id}] tenantId=[%X{tenantId}] userId=[%X{userId}] %logger:%line - %msg%n"/>
+
+    <!-- 控制台输出-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 设置一个向上传递的appender，所有级别日志都会输出，排查问题时可以直接查看改配置对应的file-->
+    <appender name="MAIN-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 这里设置file属性是为了直接查看main.log方便-->
+
+        <file>${basePath}/main.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${basePath}/main_${baseFileName}_%d{yyyy-MM-dd}_%i.log</FileNamePattern>
+            <MaxHistory>${maxHistory}</MaxHistory>
+            <MaxFileSize>${maxFileSize}</MaxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="${logLevel}">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="MAIN-LOG"/>
+    </root>
+
+</configuration>

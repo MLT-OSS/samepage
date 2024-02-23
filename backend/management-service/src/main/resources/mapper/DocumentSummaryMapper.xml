@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ai.samepage.mapper.DocumentSummaryMapper">
+
+    <resultMap id="BaseResultMap" type="ai.samepage.entity.DocumentSummary">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="md5" column="md5" jdbcType="VARCHAR"/>
+            <result property="language" column="language" jdbcType="VARCHAR"/>
+            <result property="summary" column="summary" jdbcType="VARCHAR"/>
+            <result property="questions" column="questions" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,md5,language,
+        summary,questions,create_time
+    </sql>
+</mapper>

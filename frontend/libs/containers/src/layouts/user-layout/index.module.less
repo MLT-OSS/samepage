@@ -1,0 +1,78 @@
+.user-layout {
+    .body {
+        height: 100%;
+        display: flex;
+        padding: 0 50px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow-y: auto;
+
+        .logo-box {
+            display: flex;
+            font-size: 64px;
+            height: 64px;
+        }
+
+        .content {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 560px) {
+        .body {
+            padding: 0 32px;
+            height: 100% !important;
+        }
+    }
+
+    :global {
+        .ant-modal-body {
+            padding: 0 24px;
+        }
+
+        .ant-form-item-explain-error {
+            font-size: 13px;
+        }
+
+        .input-prefix-icon {
+            font-size: 20px;
+            color: #c9c9c9;
+            margin-right: 8px;
+        }
+
+        .input-suffix-icon {
+            font-size: 20px;
+        }
+
+        .ant-input-affix-wrapper {
+            background-color: rgba(113, 113, 238, 5%);
+            box-shadow: none;
+            height: 44px;
+            border: 1px solid transparent;
+
+            .ant-input {
+                background-color: transparent;
+            }
+
+            .ant-input::placeholder {
+                font-weight: 400;
+            }
+
+            &:focus {
+                border: 1px solid #7171ee;
+            }
+
+            &.ant-input-affix-wrapper-focused {
+                background-color: #fff;
+                border: 1px solid #7171ee;
+
+                .ant-input-prefix {
+                    .input-prefix-icon {
+                        color: #7171ee;
+                    }
+                }
+            }
+        }
+    }
+}

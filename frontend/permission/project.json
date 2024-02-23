@@ -1,0 +1,26 @@
+{
+  "name": "permission",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "permission/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/permission",
+        "main": "permission/src/index.ts",
+        "tsConfig": "permission/tsconfig.lib.json",
+        "assets": []
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["permission/**/*.ts", "permission/package.json"]
+      }
+    }
+  },
+  "tags": []
+}

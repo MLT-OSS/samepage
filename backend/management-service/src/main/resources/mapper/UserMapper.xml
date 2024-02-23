@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ai.samepage.mapper.UserMapper">
+    <resultMap id="userContent" type="ai.samepage.model.UserInfoDTO">
+        <result property="id" column="id"/>
+        <result property="expireTime" column="expire_time"/>
+        <result property="mail" column="mail"/>
+        <result property="username" column="username"/>
+        <result property="status" column="status"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="tenantName" column="tenant_name"/>
+        <result property="departId" column="depart_id"/>
+        <result property="departName" column="depart_name"/>
+        <result property="roleType" column="role_type"/>
+    </resultMap>
+
+    <select id="getUserContent" resultMap="userContent">
+        select t_user.id                         as id,
+               t_user.nick_name                  as username,
+               t_user.mail                       as mail,
+               CONVERT(t_user.user_status, CHAR) as status,
+               t_user.expire_time                as expire_time
+        from t_user
+
+        where t_user.id = #{userId}
+    </select>
+    <select id="getTenant" resultMap="userContent">
+        select xci.corp_name         as tenant_name,
+               xci.id                as tenant_id,
+               xci.expire_time       as expire_time,
+               xdi.id                as depart_id,
+               xdi.department_name   as depart_name,
+               depart_user.role_type as role_type
+        from t_depart_user depart_user
+                 left join t_corp_info xci on
+            xci.id = depart_user.tenant_id
+                 left join t_department_info xdi on
+            xdi.id = depart_user.depart_id
+        where depart_user.user_id = #{userId}
+          and depart_user.is_deleted = false
+          and xdi.is_deleted = false
+    </select>
+
+    <update id="updateStatus">
+        update t_user
+        set user_status = 0,
+            update_time = #{updateTime}
+        where is_deleted = false
+          and user_status = 1
+          and exists(select 1
+                     from t_depart_user
+                     where t_user.id = t_depart_user.user_id
+                       and t_depart_user.is_deleted = false
+                       and t_depart_user.tenant_id = #{tenantId})
+    </update>
+
+    <select id="getFirstRegisterUserId" resultType="java.lang.Long">
+        select t_depart_user.user_id
+        from t_depart_user
+        where tenant_id = #{tenantId}
+          and is_deleted = false
+          and not exists (select 1
+                          from t_depart_user depart_user
+                          where t_depart_user.tenant_id = depart_user.tenant_id
+                            and depart_user.is_deleted = false
+                            and depart_user.role_type = 'enterprise_admin')
+        order by t_depart_user.create_time
+        limit 1
+    </select>
+</mapper>

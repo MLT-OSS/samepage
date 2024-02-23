@@ -1,0 +1,28 @@
+.image-preview {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 40%);
+    z-index: 10001;
+    overflow: auto;
+
+    .wapper {
+        position: relative;
+        display: inline-block;
+        width: calc(min(100vh, 100vw) * 0.8);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 4px;
+
+        .close {
+            position: absolute;
+            right: 0;
+            transform: translate(0, calc(-1 * (100% + 8px)));
+            cursor: pointer;
+
+            .icon {
+                font-size: 24px;
+            }
+        }
+    }
+}

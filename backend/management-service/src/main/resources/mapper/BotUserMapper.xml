@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ai.samepage.mapper.BotUserMapper">
+    <resultMap id="BaseResultMap" type="ai.samepage.entity.BotUserRelation">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="botKey" column="bot_id" jdbcType="INTEGER"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+        <result property="fixed" column="fixed" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,bot_id,
+        is_deleted,fixed,create_time,
+        update_time
+    </sql>
+
+
+    <update id="deleteBotUser">
+        update t_bot_user
+        set is_deleted  = true,
+            create_time = #{time}
+        where user_id = #{userId}
+          and bot_key = #{botKey}
+          and is_deleted = false
+    </update>
+
+    <select id="sidebar" resultType="java.lang.Long">
+        SELECT bot.id
+        FROM t_bot bot
+        left join t_bot_user on bot.`key` = t_bot_user.bot_key
+        where bot.is_deleted = false
+        and bot.bot_type = 'bot'
+        AND (bot.`system` = true or (t_bot_user.fixed = true and
+        t_bot_user.user_id = #{userId}))
+        <if test="side == 'h5'">
+            and bot.h5 = 'SUPPORTED'
+        </if>
+        <if test="side == 'extension'">
+            and bot.extension = 'SUPPORTED'
+        </if>
+        <if test="side == 'web' or side == null or side == ''">
+            and bot.web = 'SUPPORTED'
+        </if>
+        order by bot.`system` DESC, t_bot_user.update_time DESC
+    </select>
+</mapper>

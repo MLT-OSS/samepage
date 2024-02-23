@@ -1,0 +1,112 @@
+{
+  "name": "extension",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/extension/src",
+  "projectType": "application",
+  "targets": {
+    "_build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/extension",
+        "baseHref": "/",
+        "main": "apps/extension/src/main.tsx",
+        "tsConfig": "apps/extension/tsconfig.app.json",
+        "assets": ["apps/extension/src/assets"],
+        "styles": ["apps/extension/src/styles.less"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/extension/webpack.config.js",
+        "babelConfig": "apps/extension/babel.config.js",
+        "outputFileName": "content.js",
+        "runtimeChunk": false,
+        "extractCss": false
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "test": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [{
+            "replace": "apps/extension/src/environments/environment.ts",
+            "with": "apps/extension/src/environments/environment.prod.ts"
+          }],
+          "optimization": true,
+          "outputHashing": "media",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": true
+        }
+      }
+    },
+    "build": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "extension:_build"
+      },
+      "configurations": {
+        "development": {
+          "target": "extension:_build:development"
+        },
+        "test": {
+          "target": "extension:_build:test"
+        },
+        "production": {
+          "target": "extension:_build:production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "development",
+      "options": {
+        "target": "extension:_build:development",
+        "overrides": {
+          "watch": true,
+          "outputPath": "dist/apps/extension-watch"
+        }
+      },
+      "configurations": {
+        "development": {
+          "target": "extension:_build:development"
+        },
+        "test": {
+          "target": "extension:_build:test"
+        },
+        "production": {
+          "target": "extension:_build:production"
+        }
+      }
+    },
+    "proxy-server": {
+      "executor": "nx:run-commands",
+      "defaultConfiguration": "development",
+      "options": {
+        "commands": ["node apps/extension/proxyServer.js"],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/extension/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "stylelint": {}
+  },
+  "tags": ["type:app", "project:extension"]
+}

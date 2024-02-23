@@ -1,0 +1,45 @@
+.user-policy-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    color: rgba(0, 0, 0, 0.45);
+
+    .checkbox {
+        position: relative;
+        font-size: 18px;
+        color: #d9d9d9;
+        cursor: pointer;
+
+        &.checked {
+            color: #7171ee;
+        }
+    }
+
+    .policy-text {
+        margin-left: 8px;
+
+        .policy {
+            color: #7171ee;
+            cursor: pointer;
+
+            &:hover {
+                color: #5c5cd6;
+            }
+        }
+    }
+
+    :global {
+        .ant-checkbox-checked::after,
+        .ant-checkbox-inner {
+            border-radius: 50%;
+        }
+
+        .ant-checkbox-inner {
+            border-color: #c9c9c9;
+        }
+    }
+}

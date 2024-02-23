@@ -1,0 +1,86 @@
+:root {
+    /* stylelint-disable-next-line custom-property-pattern */
+    --rpv-core__inner-page-background-color: #f6f8fa !important;
+    /* stylelint-disable-next-line custom-property-pattern */
+    --rpv-core__page-layer-box-shadow: none !important;
+}
+
+.doc-container {
+    display: flex;
+    height: calc(100vh - 56px);
+    overflow-x: auto;
+
+    :global {
+        .right-box {
+            flex: 1;
+            min-width: 600px;
+            height: 100%;
+            display: flex;
+
+            .chat-box {
+                border-left: 1px solid #e5e7eb;
+                min-width: 320px;
+                width: 40%;
+                height: 100%;
+                background-color: #fff;
+                position: relative;
+                transition: all ease-in-out 0.2s;
+
+                &.collapsed {
+                    width: 0;
+                    min-width: 0;
+                }
+
+                .collapse-bar {
+                    display: flex;
+                    align-items: center;
+                    position: absolute;
+                    z-index: 10;
+                    top: 50%;
+                    left: -16px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    user-select: none;
+
+                    .collapse-bg {
+                        width: 16px;
+                        height: 88px;
+                        color: #fff;
+                        transform: rotate(-180deg);
+                    }
+
+                    &:hover {
+                        .collapse-bg {
+                            color: #f4f6f8;
+                        }
+                    }
+
+                    .collapse-icon {
+                        position: absolute;
+                        transform: rotate(-180deg);
+                        z-index: 1;
+                        right: 0;
+
+                        &.collapsed {
+                            transform: rotate(0);
+                        }
+                    }
+                }
+
+                .chat {
+                    height: 100%;
+                }
+            }
+        }
+
+        .upload-box {
+            flex: 1;
+            min-width: 600px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+        }
+    }
+}
