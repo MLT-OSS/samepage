@@ -70,6 +70,7 @@ Samepage 是一站式大模型 AI 助理，可以回答您的各类复杂问题�
 > [!NOTE]
 >
 > Chrome 浏览器插件[安装使用文档](./frontend/docs/extension.chrome.md)
+>
 > Edge 浏览器插件[安装使用文档](./frontend/docs/extension.edge.md)
 
 ### 移动设备适配
