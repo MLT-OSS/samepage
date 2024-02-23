@@ -1,0 +1,136 @@
+[
+  {
+    "modelName": "gpt-3.5-turbo",
+    "name": "gpt-3.5-turbo",
+    "maxRequestToken": 4000,
+    "functionCall": false
+  },
+  {
+    "modelName": "gpt-3.5-turbo-0301",
+    "name": "gpt-3.5-turbo-0301",
+    "maxRequestToken": 4000,
+    "functionCall": false
+  },
+  {
+    "modelName": "gpt-3.5-turbo-0613",
+    "name": "gpt-3.5-turbo-0613",
+    "maxRequestToken": 4000,
+    "functionCall": true,
+    "tools": [
+      "web_search",
+      "retrieval"
+    ]
+  },
+  {
+    "modelName": "gpt-3.5-turbo-16k",
+    "name": "gpt-3.5-turbo-16k",
+    "maxRequestToken": 16000,
+    "functionCall": true,
+    "tools": [
+      "web_search",
+      "retrieval"
+    ]
+  },
+  {
+    "modelName": "gpt-3.5-turbo-16k-0613",
+    "name": "gpt-3.5-turbo-16k-0613",
+    "maxRequestToken": 16000,
+    "functionCall": true,
+    "tools": [
+      "web_search",
+      "retrieval"
+    ]
+  },
+  {
+    "modelName": "gpt-3.5-turbo-1106",
+    "name": "gpt-3.5-turbo-1106",
+    "maxRequestToken": 16000,
+    "functionCall": true,
+    "tools": [
+      "web_search",
+      "retrieval"
+    ]
+  },
+  {
+    "modelName": "gpt-4",
+    "name": "gpt-4",
+    "maxRequestToken": 8192,
+    "functionCall": true,
+    "tools": [
+      "web_search",
+      "retrieval"
+    ]
+  },
+  {
+    "modelName": "gpt-4-1106-preview",
+    "name": "gpt-4-1106-preview",
+    "maxRequestToken": 128000,
+    "functionCall": true,
+    "tools": [
+      "web_search",
+      "retrieval"
+    ]
+  },
+  {
+    "modelName": "anthropic/claude-2",
+    "name": "anthropic/claude-2",
+    "maxRequestToken": 100000,
+    "functionCall": false
+  },
+  {
+    "modelName": "anthropic/claude-instant-v1",
+    "name": "anthropic/claude-instant-v1",
+    "maxRequestToken": 200000,
+    "functionCall": false
+  },
+  {
+    "modelName": "ERNIE-Bot",
+    "name": "ERNIE-Bot",
+    "maxRequestToken": 2000,
+    "functionCall": true,
+    "tools": [
+      "web_search",
+      "retrieval"
+    ]
+  },
+  {
+    "modelName": "gemini-pro",
+    "name": "gemini-pro",
+    "maxRequestToken": 30720,
+    "functionCall": false
+  },
+  {
+    "modelName": "chatglm_pro",
+    "name": "chatglm_pro",
+    "maxRequestToken": 4096,
+    "functionCall": true,
+    "tools": [
+    ]
+  },
+  {
+    "modelName": "chatglm_std",
+    "name": "chatglm_std",
+    "maxRequestToken": 1024,
+    "functionCall": true,
+    "tools": [
+    ]
+  },
+  {
+    "modelName": "chatglm_lite",
+    "name": "chatglm_lite",
+    "maxRequestToken": 512,
+    "functionCall": false,
+    "tools": [
+    ]
+  },
+  {
+    "modelName": "glm-4",
+    "name": "glm-4",
+    "maxRequestToken": 4096,
+    "functionCall": true,
+    "tools": [
+      "web_search",
+      "retrieval"
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+.image-btn {
+    .btn {
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        height: 26px;
+        line-height: 1.5;
+        color: #7171ee;
+        border-color: rgba(113, 113, 238, 20%);
+
+        .icon {
+            font-size: 16px;
+        }
+    }
+
+    :global {
+        .ant-btn > .anticon + span {
+            margin-inline-start: 4px;
+        }
+
+        .ant-btn-default {
+            border-color: rgba(113, 113, 238, 20%);
+
+            &:hover {
+                color: #7171ee;
+                border-color: rgba(113, 113, 238, 20%);
+                background-color: rgba(113, 113, 238, 10%);
+            }
+
+            &:disabled {
+                background-color: #fff;
+                opacity: 0.5;
+            }
+        }
+    }
+}

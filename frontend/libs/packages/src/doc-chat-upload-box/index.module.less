@@ -1,0 +1,120 @@
+.upload-info {
+    width: 688px;
+    height: 376px;
+
+    :global {
+        .custom-upload {
+            border-color: #7171ee;
+            background-color: #fff;
+
+            .drag-box {
+                .ant-upload-drag-icon {
+                    margin-bottom: 24px;
+                }
+
+                .ant-upload-text {
+                    color: #7171ee;
+                    font-size: 20px;
+                    font-weight: 400;
+                    margin-bottom: 12px;
+                }
+
+                .ant-upload-hint {
+                    color: rgba(0, 0, 0, 0.45);
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 22px;
+                }
+            }
+        }
+
+        .file-box {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding-top: 86px;
+            border-radius: 4px;
+            border: 1px dashed #d2d2d2;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .file-icon {
+                margin-bottom: 16px;
+            }
+
+            .file-name {
+                color: rgba(0, 0, 0, 0.75);
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 22px;
+                margin-bottom: 8px;
+            }
+
+            .error-info {
+                color: #f00;
+                text-align: center;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 22px;
+                margin-bottom: 46px;
+            }
+
+            .progress-info {
+                display: flex;
+                align-items: center;
+                margin-bottom: 6px;
+
+                .txt {
+                    margin-left: 4px;
+                    color: rgba(0, 0, 0, 0.45);
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 22px;
+                }
+            }
+
+            .progress-list {
+                margin-bottom: 26px;
+            }
+
+            .tool-list {
+                display: flex;
+            }
+
+            .custom-progress {
+                width: 72px;
+
+                & + .custom-progress {
+                    margin-left: 4px;
+                }
+            }
+
+            .custom-btn + .custom-btn {
+                margin-left: 20px;
+            }
+
+            .custom-btn {
+                width: 88px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+
+                .btn-icon {
+                    font-size: 20px;
+                    height: 20px;
+                }
+
+                & > .anticon + span {
+                    margin-left: 4px;
+                    color: #7171ee;
+                    font-size: 13px;
+                    font-weight: 600;
+                    line-height: 22px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,97 @@
+{
+  "name": "playground",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/playground/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "playground:_build",
+        "transfers": [{ "from": "NX_PLAYGROUND_BASE_URL", "to": "baseHref" }]
+      },
+      "configurations": {
+        "development": { "target": "playground:_build:development" },
+        "test": { "target": "playground:_build:test" },
+        "production": { "target": "playground:_build:production" }
+      }
+    },
+    "serve": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "development",
+      "options": {
+        "target": "playground:_serve",
+        "transfers": [
+          { "from": "NX_PLAYGROUND_BASE_URL", "to": "baseHref" },
+          { "from": "NX_PLAYGROUND_PORT", "to": "port" }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": { "lintFilePatterns": ["apps/playground/**/*.{ts,tsx,js,jsx}"] }
+    },
+    "_build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/playground",
+        "index": "apps/playground/src/index.html",
+        "baseHref": "/",
+        "main": "apps/playground/src/main.tsx",
+        "tsConfig": "apps/playground/tsconfig.app.json",
+        "assets": ["apps/playground/src/favicon.ico", "apps/playground/src/assets"],
+        "styles": ["apps/playground/src/styles.less"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/playground/webpack.config.js"
+      },
+      "configurations": {
+        "development": { "extractLicenses": false, "optimization": false, "sourceMap": true, "vendorChunk": true },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/playground/src/environments/environment.ts",
+              "with": "apps/playground/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "test": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "_serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "playground:_build",
+        "hmr": true,
+        "proxyConfig": "proxyConf.js",
+        "allowedHosts": "all",
+        "host": "0.0.0.0"
+      },
+      "configurations": {
+        "development": { "buildTarget": "playground:_build:development" },
+        "production": { "buildTarget": "playground:_sbuild:production", "hmr": false }
+      }
+    },
+    "stylelint": {}
+  },
+  "tags": ["type:app", "project:playground"]
+}

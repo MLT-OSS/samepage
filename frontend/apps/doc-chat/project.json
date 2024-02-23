@@ -1,0 +1,120 @@
+{
+  "name": "doc-chat",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/doc-chat/src",
+  "projectType": "application",
+  "targets": {
+    "_build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/doc-chat",
+        "index": "apps/doc-chat/src/index.html",
+        "baseHref": "/",
+        "main": "apps/doc-chat/src/main.tsx",
+        "tsConfig": "apps/doc-chat/tsconfig.app.json",
+        "assets": ["apps/doc-chat/src/favicon.ico", "apps/doc-chat/src/assets"],
+        "styles": ["apps/doc-chat/src/styles.less"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/doc-chat/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "test": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "production": {
+          "fileReplacements": [{
+            "replace": "apps/doc-chat/src/environments/environment.ts",
+            "with": "apps/doc-chat/src/environments/environment.prod.ts"
+          }],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "build": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "doc-chat:_build",
+        "transfers": [{
+          "from": "NX_DOC_CHAT_BASE_URL",
+          "to": "baseHref"
+        }]
+      },
+      "configurations": {
+        "development": {
+          "target": "doc-chat:_build:development"
+        },
+        "test": {
+          "target": "doc-chat:_build:test"
+        },
+        "production": {
+          "target": "doc-chat:_build:production"
+        }
+      }
+    },
+    "_serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "doc-chat:_build",
+        "hmr": true,
+        "proxyConfig": "proxyConf.js",
+        "allowedHosts": "all"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "doc-chat:_build:development"
+        },
+        "production": {
+          "buildTarget": "doc-chat:_build:production",
+          "hmr": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "development",
+      "options": {
+        "target": "doc-chat:_serve",
+        "transfers": [{
+            "from": "NX_DOC_CHAT_BASE_URL",
+            "to": "baseHref"
+          },
+          {
+            "from": "NX_DOC_CHAT_PORT",
+            "to": "port"
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/doc-chat/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "stylelint": {}
+  },
+  "tags": ["type:app", "project:doc-chat"]
+}

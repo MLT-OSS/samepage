@@ -1,0 +1,105 @@
+.pwd-login-form-container {
+    margin-top: 56px;
+
+    &.link-register {
+        margin-top: 24px;
+    }
+
+    .invite-info {
+        text-align: center;
+        color: rgba(0, 0, 0, 0.75);
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 23px;
+
+        .emphasis {
+            color: #7171ee;
+        }
+    }
+
+    .back-mini {
+        position: fixed;
+        left: 0px;
+        bottom: 60px;
+        display: flex;
+        padding: 6px 16px 4px 5px;
+        align-items: center;
+        justify-content: flex-start;
+        cursor: pointer;
+        border-radius: 0 100px 100px 0;
+        border: 1px solid rgba(113, 113, 238, 0.2);
+        box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.05);
+        color: #7171ee;
+        background-color: #fff;
+        font-size: 11px;
+    }
+
+    :global {
+        .operate-btns-box {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+
+            .right-btn-box {
+                font-size: 13px;
+                color: rgba(0, 0, 0, 0.45%);
+            }
+
+            .operate-btn {
+                height: auto;
+                padding: 0;
+                font-size: 13px;
+                color: #7171ee;
+
+                &:hover {
+                    color: #5c5cd6;
+                }
+            }
+        }
+
+        .footer-box {
+            // position: absolute;
+            bottom: 0;
+            width: 100%;
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.45);
+
+            .link-btn {
+                height: 18px;
+                padding: 0;
+                font-size: 13px;
+                color: #7171ee;
+
+                &:hover {
+                    color: #5c5cd6;
+                }
+            }
+
+            .footer-item {
+                width: 100%;
+                height: 18px;
+                text-align: center;
+
+                &:not(:first-child) {
+                    margin-top: 12px;
+                }
+            }
+        }
+
+        .form-btns-box {
+            width: 100%;
+            padding-top: 16px;
+
+            .login-btn {
+                width: 100%;
+                height: 44px;
+                font-size: 16px;
+                font-weight: 600;
+
+                &:hover {
+                    background-color: #5c5cd6;
+                }
+            }
+        }
+    }
+}

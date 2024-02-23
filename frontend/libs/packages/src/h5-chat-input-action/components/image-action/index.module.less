@@ -1,0 +1,70 @@
+.image-action {
+    height: 40px;
+
+    .custom-upload {
+        height: 100%;
+
+        &.disabled {
+            opacity: 0.5;
+        }
+
+        :global {
+            .ant-upload {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .upload-btn {
+            width: 100%;
+            background-color: #7171ee;
+        }
+
+        .loadinng-upload-text {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 4px;
+            background-color: rgba(113, 113, 238, 0.3);
+
+            .loadinng-drag-text {
+                color: #7171ee;
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .cancel-btn {
+                color: #7171ee;
+                font-size: 13px;
+                font-weight: 600;
+                padding: 0;
+                position: absolute;
+                top: 0;
+                right: 12px;
+
+                &:active,
+                &:hover {
+                    color: #7171ee !important;
+                    background-color: unset !important;
+                }
+            }
+        }
+
+        .error-drag {
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 4px;
+            background-color: #ffe0e0;
+
+            .error-drag-text {
+                color: #f00;
+                font-size: 13px;
+                font-weight: 600;
+            }
+        }
+    }
+}

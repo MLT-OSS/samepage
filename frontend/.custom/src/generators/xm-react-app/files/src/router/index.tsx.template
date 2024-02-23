@@ -1,0 +1,17 @@
+import { createBrowserRouter } from 'react-router-dom';
+import { ENV } from '@/utils';
+import {PageNoFound} from '@xm/containers';
+
+const routerWapper = createBrowserRouter;
+
+export const globalRouters = routerWapper(
+    [
+        {
+            path: '/',
+            element: <PageNoFound />
+        }
+    ],
+    {
+        basename: ENV?.NX_<%= xm_upper_name %>_BASE_URL ?? '/'
+    }
+);

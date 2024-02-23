@@ -1,0 +1,27 @@
+.h5-app-layout {
+    height: calc(var(--vh, 1vh) * 100);
+    width: 100vw;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    .header {
+        background-color: #fff;
+    }
+
+    .content {
+        flex-grow: 1;
+        display: flex;
+        height: 100%;
+    }
+
+    .tail {
+        background-color: #fff;
+    }
+
+    :global {
+        .adm-nav-bar-back-arrow {
+            font-size: var(--adm-font-size-10);
+        }
+    }
+}

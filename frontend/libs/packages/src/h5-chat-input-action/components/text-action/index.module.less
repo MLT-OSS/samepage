@@ -1,0 +1,94 @@
+.input-inner {
+    .input-box {
+        display: flex;
+        align-items: flex-end;
+        background-color: #fff;
+        width: 100%;
+        border: 1px solid #f8f8fe;
+        border-radius: 4px;
+        padding: 4px 2px 4px 8px;
+
+        &:focus-within {
+            background-color: #fff;
+            border-color: #7171ee;
+        }
+
+        :global {
+            .adm-text-area-element {
+                color: rgba(0, 0, 0, 0.75);
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 26px; /* 162.5% */
+                min-height: 28px;
+            }
+        }
+
+        .send-btn {
+            margin-left: 8px;
+            border: none;
+            box-shadow: none;
+            background: #7171ee;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .send-icon {
+                color: #fff;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .edit-cancle {
+        position: absolute;
+        top: -40px;
+        right: 12px;
+        z-index: 1;
+        text-align: right;
+        height: 32px;
+        flex-shrink: 0;
+        background-color: #fff;
+
+        .stop {
+            display: inline-flex;
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
+            padding: 4px 8px;
+            color: #7171ee;
+            font-size: 13px;
+            border-radius: 4px;
+            line-height: 22px;
+            border: 1px solid rgba(113, 113, 238, 0.2);
+            font-style: normal;
+            font-weight: 600;
+
+            .icon {
+                margin: 1% 4px 0 0;
+            }
+
+            &:hover {
+                background: #f1f1fc;
+            }
+        }
+    }
+
+    .exceed-tips {
+        position: absolute;
+        top: -36px;
+        width: 100%;
+        text-align: center;
+
+        .text {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 100px;
+            border: 1px solid #7171ee;
+            color: #fff;
+            font-size: 13px;
+            opacity: 0.45;
+            background: #000;
+        }
+    }
+}

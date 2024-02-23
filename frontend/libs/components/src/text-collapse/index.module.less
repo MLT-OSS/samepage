@@ -1,0 +1,54 @@
+@row: 4;
+@height: calc(@row * 22px);
+
+.text-collapse {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-size: 13px;
+    line-height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+
+    .refer {
+        float: left;
+        position: absolute;
+        z-index: -1000;
+        top: calc(-1 * (100vh + 100%));
+        // left: -100vw;
+        transform: translate(calc(-1 * (100vw + 100%)), -100%);
+        // visibility: hidden; safari计算height问题
+        // max-height: 100vh;
+        // overflow: hidden;
+    }
+
+    .collapse {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: @row;
+        -webkit-box-orient: vertical;
+        max-height: calc(@height + 2px);
+    }
+
+    .option {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .icon {
+            cursor: pointer;
+            font-size: 12px;
+            color: #212121;
+
+            &:hover {
+                color: #7171ee;
+            }
+        }
+
+        .a {
+            transform: rotate(180deg);
+        }
+    }
+}

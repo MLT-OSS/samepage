@@ -1,0 +1,214 @@
+.robot-shop {
+    height: 100%;
+
+    .robot-shop-con {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        overflow: hidden;
+    }
+
+    .category-bar {
+        width: 100%;
+        height: 56px;
+
+        :global {
+            .ant-tabs-nav {
+                margin: 0;
+            }
+
+            .ant-tabs-nav::before {
+                border-bottom: none;
+            }
+
+            .ant-tabs-tab {
+                padding: 14px 17px;
+            }
+
+            .ant-tabs-tab + .ant-tabs-tab {
+                margin: 0;
+            }
+
+            .ant-tabs-nav .ant-tabs-ink-bar {
+                width: 24px !important;
+                height: 4px;
+                bottom: 10px;
+            }
+        }
+    }
+
+    .search {
+        padding: 4px 16px 8px;
+        top: 0;
+        background: #fff;
+        height: 44px;
+
+        :global {
+            .ant-input-affix-wrapper {
+                padding-left: 7px;
+            }
+        }
+    }
+
+    .child-category-bar {
+        height: 34px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px 8px;
+
+        :global {
+            .ant-tabs-nav {
+                margin: 0;
+            }
+
+            .ant-tabs-nav::before {
+                border-bottom: none;
+            }
+
+            .ant-tabs-nav-wrap {
+                height: 26px;
+            }
+
+            .ant-tabs-tab {
+                margin: 0 4px;
+                padding: 0;
+                border-radius: 4px;
+                color: #7171ee;
+            }
+
+            .ant-tabs-nav .ant-tabs-ink-bar {
+                height: 0;
+            }
+
+            .ant-tabs-tab-active {
+                background-color: #7171ee;
+
+                .ant-tabs-tab-btn {
+                    color: #fff;
+                }
+            }
+        }
+
+        .child-category-name {
+            height: 26px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #7171ee33;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 18px;
+        }
+    }
+
+    .robot-category-bar {
+        line-height: 28px;
+        font-size: 14px;
+    }
+
+    .search-border {
+        border-bottom: 1px solid #f3f3f3;
+    }
+
+    .icon-size {
+        width: 16px;
+        height: 16px;
+    }
+
+    .robot-list {
+        width: 100%;
+        flex: 1;
+        overflow-y: auto;
+
+        .empty-wapper {
+            height: 100%;
+
+            .empty {
+                position: relative;
+                top: calc(50% - 50px);
+                transform: translate(0, -50%);
+            }
+        }
+    }
+
+    .item-out {
+        padding: 0 16px;
+        cursor: pointer;
+
+        &.disabled {
+            opacity: 0.5;
+
+            &:hover {
+                background: inherit;
+            }
+        }
+
+        @media (any-hover: hover) and (pointer: fine) {
+            &:hover {
+                background: #f1f1fd;
+            }
+        }
+    }
+
+    .robot-item {
+        width: 100%;
+        // height: 72px;
+        display: flex;
+        align-items: center;
+        // padding-right: 24px;
+        border-bottom: 1px solid #f3f3f3;
+
+        .robot-icon {
+            width: 48px;
+            height: 48px;
+        }
+
+        .robot-con {
+            flex: 1;
+            width: calc(100% - 64px);
+            padding: 16px 0px 16px 8px;
+        }
+
+        .title {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 18px;
+            text-align: left;
+            color: #000000bf;
+            margin: 0;
+        }
+
+        .h5-title {
+            font-size: 15px;
+        }
+
+        .desc {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18px;
+            text-align: left;
+            color: #00000073;
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            margin-top: 4px;
+        }
+
+        .collapse-2 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            white-space: normal;
+        }
+
+        .fix-icon {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+    }
+}

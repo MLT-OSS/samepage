@@ -1,0 +1,116 @@
+.prompt-scroll-tabs {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+
+    .prompt-type-tab {
+        width: 100%;
+        height: 56px;
+        display: flex;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        position: sticky;
+        top: 0;
+        background: #fff;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 16px;
+
+        .add-icon {
+            font-size: 16px;
+            right: 12px;
+            color: #7171ee;
+        }
+
+        :global {
+            .ant-tabs-nav {
+                margin: 0;
+            }
+
+            .ant-tabs-nav::before {
+                border-bottom: none;
+            }
+
+            .ant-tabs-tab {
+                padding: 10px 17px;
+                font-size: 14px;
+            }
+
+            .ant-tabs-tab + .ant-tabs-tab {
+                margin: 0;
+            }
+
+            .ant-tabs-tab-active {
+                font-weight: 600;
+            }
+
+            .ant-tabs-nav .ant-tabs-ink-bar {
+                width: 24px !important;
+                height: 4px;
+                bottom: 0;
+            }
+        }
+    }
+
+    .empty-wapper {
+        height: calc(100% - 60px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .scroll-wapper {
+        height: calc(100% - 60px);
+        overflow: auto;
+
+        :global {
+            // stylelint-disable-next-line selector-class-pattern
+            .infinite-scroll-component__outerdiv {
+                height: 100%;
+            }
+        }
+    }
+
+    .nothing {
+        margin: 24px 0;
+        text-align: center;
+        color: rgba(0, 0, 0, 45%);
+    }
+
+    .icon-size {
+        width: 16px;
+        height: 16px;
+    }
+
+    .item-wapper {
+        width: 100%;
+        height: 40px;
+        padding-left: 16px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            background: linear-gradient(0deg, rgba(113, 113, 238, 10%) 0%, rgba(113, 113, 238, 10%) 100%), #fff;
+        }
+    }
+
+    &.h5-prompt {
+        .item-wapper {
+            height: 56px;
+            padding-left: 0;
+        }
+
+        :global {
+            .ant-tabs-nav {
+                font-weight: 600;
+            }
+
+            .ant-tabs-nav-list {
+                width: 100vw;
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${title}]]</title>
+</head>
+<body>
+<div style="background-color:#ECECEC;width: 800px;">
+
+    <table cellpadding="0" align="center"
+           style="width: 800px; border: 1px solid rgba(113,113,238, 0.5);
+           border-top-left-radius: 5px; border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;
+             font-size: 14px;  line-height: 1.5; border-collapse: collapse;
+              background-position: initial initial; background-repeat: initial initial;
+              background:#fff;padding: 0px;">
+        <tbody>
+        <tr>
+            <td style="padding: 0px;">
+                <div>
+                    <div style="position: relative;padding:40px 24px 12px 40px; background-color:#fff;">
+                         <h2 style="margin: 5px 0px; ">
+                            亲爱的用户：
+                        </h2>
+                        <p style="font-size: 14px;">
+                            您正在进行[[${title}]]操作，本次请求的验证码为：<br>
+                            <br/>
+                            <b style="font-size: 40px;color: #7171EE;">[[${code}]]</b><br>
+                            <br/>
+                            请在验证码输入框中输入以完成验证，此验证码将在30分钟后过期，请尽快完成验证。<br>
+                            如非本人操作，请忽略此邮件。<br>
+                            谢谢! <br/>
+
+                        <p align="right" style="font-size: 13px;color: rgba(0,0,0,0.45)">[[${date}]]</p>
+                    </div>
+                    <div style="width:800px;margin:0 auto;">
+                        <div style="padding:16px 16px 16px;font-size:13px;background-color: #7171EE;display: flex;align-items: center;padding-left: 40px">
+                            <div style="font-size: 13px; color: white;margin-left: 16px;">
+                                本邮件系统自动发送，请勿回复!<br>
+                                请保管好您的邮箱，避免账号被他人盗用
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

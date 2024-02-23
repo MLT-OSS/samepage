@@ -1,0 +1,108 @@
+.input-inner {
+    .input-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        border: 1px solid #f8f8fe;
+        border-radius: 4px;
+        padding: 8px 8px 4px;
+        background-color: #f8f8fe;
+
+        &:focus-within {
+            background-color: #fff;
+            border-color: #7171ee;
+        }
+
+        .input-area {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .input {
+            width: calc(100% - 24px - 8px - 16px);
+            padding: 0;
+            line-height: 24px;
+            resize: none;
+            height: 52px;
+            min-height: 52px;
+            max-height: 120px;
+        }
+
+        .send-btn {
+            margin-left: 16px;
+            border: none;
+            box-shadow: none;
+        }
+
+        .online-search {
+            height: 24px;
+            color: #7171ee;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+
+            .icon {
+                color: #7171ee;
+                margin-right: 4px;
+                font-size: 16px;
+            }
+
+            .text {
+                margin: 0;
+            }
+
+            .switch {
+                margin: 0 8px;
+            }
+
+            .guid-icon {
+                color: #212121;
+                opacity: 0.3;
+                width: 16px;
+                height: 16px;
+                font-size: 16px;
+                cursor: help;
+            }
+        }
+
+        :global {
+            .ant-btn-primary:disabled {
+                background-color: transparent;
+                color: rgba(113, 113, 238, 50%);
+            }
+        }
+    }
+
+    &.edit {
+        .input-box {
+            border: 1px solid #7171ee;
+            border-radius: 4px;
+            padding: 8px;
+            background-color: #fff;
+
+            .input {
+                width: 100%;
+                min-height: 24px;
+                padding: 0;
+                line-height: 24px;
+            }
+        }
+    }
+
+    .exceed-tips {
+        position: absolute;
+        bottom: -10px;
+        width: 100%;
+        text-align: center;
+
+        .text {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #fff;
+            border-radius: 100px;
+            border: 1px solid #7171ee;
+            color: #7171ee;
+            font-size: 13px;
+        }
+    }
+}

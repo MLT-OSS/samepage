@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ai.samepage.mapper.ConversationMessageMapper">
+    <resultMap id="BaseResultMap" type="ai.samepage.entity.ConversationMessage">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="messageId" column="message_id" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="contentType" column="content_type"
+                typeHandler="com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler"/>
+        <result property="role" column="role"
+                typeHandler="com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler"/>
+        <result property="conversationId" column="conversation_id" jdbcType="VARCHAR"/>
+        <result property="createId" column="create_id" jdbcType="BIGINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="suggest" column="suggest" jdbcType="VARCHAR"/>
+        <result property="type" column="type"
+                typeHandler="com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler"/>
+        <result property="requestToken" column="request_token"/>
+        <result property="responseToken" column="response_token"/>
+        <result property="reference" column="reference" jdbcType="VARCHAR"/>
+        <result property="like" column="like" jdbcType="VARCHAR"/>
+        <result property="intentId" column="intent_id" jdbcType="VARCHAR"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="source" column="source"/>
+        <result property="longContent" column="long_content"/>
+        <result property="question" column="question"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        `id`,message_id,parent_id,`source`,
+        content,content_type,`role`,
+        conversation_id,request_token,
+        response_token,create_id,create_time,
+        status,suggest,update_time,
+        type,`reference`,`like`,
+        intent_id,is_deleted,long_content,`question`
+    </sql>
+    <insert id="saveBatch">
+        insert into ${msgTableName} (`id`, message_id, parent_id,
+        content, content_type, `role`,
+        conversation_id, request_token,
+        response_token, create_id, create_time,
+        status, suggest, update_time,
+        type, `reference`, `like`,
+        intent_id, is_deleted,`source`,`long_content`)
+        values
+        <if test="msgBatch.size() > 0">
+            <foreach collection="msgBatch" separator="," item="msg">
+                (#{msg.id},
+                #{msg.messageId},
+                #{msg.parentId},
+                #{msg.content},
+                #{msg.contentType,typeHandler=com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler},
+                #{msg.role,typeHandler=com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler},
+                #{msg.conversationId},
+                #{msg.requestToken},
+                #{msg.responseToken},
+                #{msg.createId},
+                #{msg.createTime},
+                #{msg.status},
+                #{msg.suggest},
+                #{msg.updateTime},
+                #{msg.type,typeHandler=com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler},
+                #{msg.reference},
+                #{msg.like},
+                #{msg.intentId},
+                #{msg.isDeleted},
+                #{msg.source},
+                #{msg.longContent}
+                )
+            </foreach>
+        </if>
+    </insert>
+
+    <update id="updateConvMsgFeedback">
+        update ${tableName}
+        set `like`      = #{like},
+            update_time = #{updateTime}
+        where create_id = #{userId}
+          and message_id = #{msgId}
+          and conversation_id = #{convId}
+          and is_deleted = false
+    </update>
+
+    <select id="listMessage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where create_id = #{userId}
+        and conversation_id = #{convId}
+        and is_deleted = false
+    </select>
+
+    <update id="deleteMsg">
+        update ${tableName}
+        set is_deleted  = true,
+            update_time = #{updateTime}
+        where create_id = #{userId}
+          and message_id = #{msgId}
+          and conversation_id = #{convId}
+          and is_deleted = false
+          and role = 1
+    </update>
+    <update id="updateStatus">
+        update ${msgTableName}
+        set update_time = #{updateTime},
+        status = #{status}
+        where
+        conversation_id = #{convId}
+        and message_id in
+        <foreach collection="ids" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </update>
+    <update id="updateMsg">
+        update ${tableName}
+        set update_time = #{msg.updateTime},
+        <if test="msg.model != null and msg.model != ''">
+            model = #{msg.model},
+        </if>
+        <if test="msg.status != null">
+            status = #{msg.status},
+        </if>
+        <if test="msg.content != null and msg.content != ''">
+            content = #{msg.content},
+        </if>
+        <if test="msg.longContent != null and msg.longContent != ''">
+            long_content = #{msg.longContent},
+        </if>
+        content_type = #{contentType},
+        request_token = #{msg.requestToken},
+        response_token = #{msg.responseToken},
+        suggest = #{msg.suggest},
+        `reference` = #{msg.reference},
+        intent_id = #{msg.intentId},
+        `source` = #{msg.source},
+        `question` = #{msg.question}
+        where message_id = #{msg.messageId}
+        and conversation_id = #{msg.conversationId}
+        and create_id = #{msg.createId}
+        <if test="status != null and status.size() > 0">
+            and status in
+            <foreach collection="status" item="code" open="(" separator="," close=")">
+                #{code}
+            </foreach>
+        </if>
+    </update>
+
+    <select id="getMsg" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${msgTableName} msg
+        where msg.message_id = #{msgId}
+        and msg.conversation_id = #{convId}
+        and msg.is_deleted != true
+        and msg.create_id = #{userId}
+        and exists (
+        select 1 from ${convTableName} conv where conv.id = #{convId}
+        and conv.is_deleted = false and conv.create_id = #{userId}
+        )
+    </select>
+    <select id="listMsg" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${msgTableName}
+        where create_id = #{userId} and conversation_id= #{convId}
+        <if test="msgIds.length > 0">
+            and message_id in
+            <foreach collection="msgIds" open="(" item="id" close=")" separator=",">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+    <select id="getTemplateMsg" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where create_id = #{userId} and conversation_id= #{convId}
+        and content = #{content}
+    </select>
+    <select id="getTemplateMsgById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where create_id = #{userId} and conversation_id= #{convId}
+        and message_id = #{messageId}
+    </select>
+
+    <select id="getMsgById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${msgTableName} msg
+        where msg.message_id = #{msgId}
+        and msg.conversation_id = #{convId}
+        and msg.is_deleted != true
+        and msg.create_id = #{userId}
+    </select>
+</mapper>

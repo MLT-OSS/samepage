@@ -1,0 +1,26 @@
+{
+  "name": "services",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "services/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/services",
+        "main": "services/src/index.ts",
+        "tsConfig": "services/tsconfig.lib.json",
+        "assets": []
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["services/**/*.ts", "services/package.json"]
+      }
+    }
+  },
+  "tags": []
+}

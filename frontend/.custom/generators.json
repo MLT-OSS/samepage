@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "xm-react-app": {
+      "factory": "./src/generators/xm-react-app/generator",
+      "schema": "./src/generators/xm-react-app/schema.json",
+      "description": "xm-react-app generator"
+    }
+  }
+}

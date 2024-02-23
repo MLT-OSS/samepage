@@ -1,0 +1,14 @@
+{
+  "executors": {
+    "dev": {
+      "implementation": "./src/executors/dev/executor",
+      "schema": "./src/executors/dev/schema.json",
+      "description": "dev executor"
+    },
+    "env-transfer": {
+      "implementation": "./src/executors/env-transfer/executor",
+      "schema": "./src/executors/env-transfer/schema.json",
+      "description": "env-transfer executor"
+    }
+  }
+}

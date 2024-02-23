@@ -1,0 +1,37 @@
+{
+  "name": "containers",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/containers/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/containers/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/containers",
+        "tsConfig": "libs/containers/tsconfig.lib.json",
+        "project": "libs/containers/package.json",
+        "entryFile": "libs/containers/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/containers/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "stylelint": {}
+  }
+}

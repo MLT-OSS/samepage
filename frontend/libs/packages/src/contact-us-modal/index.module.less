@@ -1,0 +1,150 @@
+.custom-modal {
+    :global {
+        .ant-modal-header {
+            height: 72px;
+            padding: 0;
+            border: none;
+
+            .ant-modal-title {
+                color: rgba(0, 0, 0, 0.75);
+                text-align: center;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 72px;
+            }
+        }
+
+        .ant-modal-content {
+            padding: 0;
+        }
+
+        .ant-modal-close {
+            height: 36px;
+
+            &:hover {
+                background-color: inherit;
+            }
+        }
+
+        .ant-modal-body {
+            padding: 0;
+        }
+
+        .concat-content {
+            .top-text {
+                color: rgba(0, 0, 0, 0.75);
+                font-size: 14px;
+                font-weight: 400;
+                line-height: normal;
+                text-align: center;
+
+                span {
+                    color: #7171ee;
+                }
+            }
+
+            .concat-box {
+                display: flex;
+                padding-top: 40px;
+                padding-bottom: 56px;
+
+                .erwei-qr {
+                    width: 230px;
+                    text-align: center;
+
+                    .er-img {
+                        width: 120px;
+                        height: 120px;
+                    }
+                }
+
+                .right-box {
+                    flex: 1;
+                    border-left: 1px solid #efefef;
+                    padding: 0 32px;
+                    padding-top: 2px;
+
+                    .input-box {
+                        height: 44px;
+                        border-radius: 4px;
+                        border: 1px solid #7171ee;
+                        background: #fff;
+                        display: flex;
+                        align-items: center;
+                        padding-left: 12px;
+                        margin-bottom: 24px;
+
+                        .email {
+                            width: 20px;
+                            height: 20px;
+                            margin-right: 8px;
+                        }
+
+                        .text {
+                            color: rgba(0, 0, 0, 0.75);
+                            font-size: 16px;
+                            font-weight: 400;
+                            line-height: normal;
+                        }
+                    }
+
+                    .copy-btn {
+                        width: 100%;
+                        height: 44px;
+                        padding: 0;
+                        line-height: 44px;
+                        border-radius: 4px;
+                        background: #7171ee;
+
+                        &:hover {
+                            background: #5c5cd6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 560px) {
+        :global {
+            .ant-modal {
+                width: calc(100% - 32px) !important;
+            }
+
+            .ant-modal-header {
+                .ant-modal-title {
+                    font-weight: 600;
+                }
+            }
+
+            .concat-content {
+                padding: 0 40px;
+
+                .top-text {
+                    line-height: 22px;
+                }
+
+                .concat-box {
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 24px 0;
+
+                    .erwei-qr {
+                        margin-bottom: 24px;
+                    }
+
+                    .right-box {
+                        border: none;
+                        padding: 0;
+                        width: 100%;
+
+                        button {
+                            font-size: 14px;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

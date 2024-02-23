@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "XmReactApp",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "项目名称",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "项目名称？"
+    },
+    "port": {
+      "type": ["number", "null", "string"],
+      "description": "development server port",
+      "default": 4200,
+      "x-prompt": "本地开发环境使用的服务端口？"
+    },
+    "isLogin": {
+      "type": "boolean",
+      "description": "Generate xm react application with login server.",
+      "x-prompt": "是否使用本地登录服务?",
+      "default": true
+    }
+  },
+  "required": ["name"]
+}

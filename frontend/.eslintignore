@@ -1,0 +1,5 @@
+node_modules
+webpack.config.*
+*.md
+proxyServer.js
+deploy/*

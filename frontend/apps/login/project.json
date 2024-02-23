@@ -1,0 +1,128 @@
+{
+  "name": "login",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/login/src",
+  "projectType": "application",
+  "targets": {
+    "_build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/login",
+        "index": "apps/login/src/index.html",
+        "baseHref": "/",
+        "main": "apps/login/src/main.tsx",
+        "tsConfig": "apps/login/tsconfig.app.json",
+        "assets": ["apps/login/src/favicon.ico", "apps/login/src/assets"],
+        "styles": ["apps/login/src/styles.less"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/login/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "test": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "production": {
+          "fileReplacements": [{
+            "replace": "apps/login/src/environments/environment.ts",
+            "with": "apps/login/src/environments/environment.prod.ts"
+          }],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "build": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "login:_build",
+        "transfers": [{
+          "from": "NX_LOGIN_BASE_URL",
+          "to": "baseHref"
+        }]
+      },
+      "configurations": {
+        "development": {
+          "target": "login:_build:development"
+        },
+        "test": {
+          "target": "login:_build:test"
+        },
+        "production": {
+          "target": "login:_build:production"
+        }
+      }
+    },
+    "_serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "login:_build",
+        "hmr": true,
+        "proxyConfig": "proxyConf.js",
+        "allowedHosts": "all",
+        "host": "0.0.0.0"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "login:_build:development"
+        },
+        "production": {
+          "buildTarget": "login:_build:production",
+          "hmr": false
+        }
+      }
+    },
+    "__serve": {
+      "executor": "@xm/custom-plugins:dev",
+      "defaultConfiguration": "development",
+      "options": {
+        "target": "_serve"
+      }
+    },
+    "serve": {
+      "executor": "@xm/custom-plugins:env-transfer",
+      "defaultConfiguration": "development",
+      "options": {
+        "target": "login:_serve",
+        "transfers": [{
+            "from": "NX_LOGIN_BASE_URL",
+            "to": "baseHref"
+          },
+          {
+            "from": "NX_LOGIN_PORT",
+            "to": "port"
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/login/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "stylelint": {}
+  },
+  "tags": ["type:app", "project:login"]
+}
