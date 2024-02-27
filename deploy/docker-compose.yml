@@ -120,7 +120,7 @@ services:
       one-api:
         condition: service_healthy
   ai-service-worker:
-    image: samepaage/ai-service:main
+    image: samepaage/samepage-ai-core:main
     container_name: ai-service-worker
     restart: always
     networks:
