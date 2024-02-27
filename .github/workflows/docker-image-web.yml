@@ -1,0 +1,78 @@
+name: Web Docker Image CI
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+    branches:
+      - 'main'
+  release:
+    types: [ published ]
+
+env:
+  IMAGE_NAME: 'samepaage/samepage-web'
+  DOCKERFILE: './frontend/Dockerfile'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable=${{ startsWith(github.ref, 'refs/tags/') }}
+            type=ref,event=branch
+            type=sha,enable=true,priority=100,prefix=,suffix=,format=long
+            type=raw,value=${{ github.ref_name }},enable=${{ startsWith(github.ref, 'refs/tags/') }}
+      - name: set Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16.14'
+      - name: build web
+        run: |
+           cd ./frontend
+           npm install -g pnpm   
+           pnpm install --no-frozen-lockfile
+           pnpm nx run login:build 
+           pnpm nx run web:build 
+           pnpm nx run doc-chat:build 
+           pnpm nx run h5:build
+           pnpm nx run playground:build 
+           pnpm nx run scripts:build
+           cd ..          
+            
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          content: ./
+          file: ${{ env.DOCKERFILE }}
+          platforms: |
+            linux/amd64
+            linux/arm64
+          build-args: |
+            COMMIT_SHA=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          context: .
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

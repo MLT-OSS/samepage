@@ -254,7 +254,6 @@ import static ai.samepage.constant.MessageConstants.INPUT_TEXT_TYPE;
  */
 @Service("assistant_chat")
 @Slf4j
-@ConditionalOnBean(LlmGatewayService.class)
 public class AssistantConvMsgTaskService implements ConvMsgTaskService {
 
 
