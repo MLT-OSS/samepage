@@ -145,6 +145,34 @@ docker compose up -d
 
 在登录之后，重要的一步是配置one-api来接入所需的大型模型渠道。此步骤对于确保您能正常使用`Samepage`非常重要。
 
+
+**模型校验和配置**
+
+**校验步骤：**
+
+检查 `conf.json` 文件中是否存在与您在 One-API 中配置的模型相对应的模型。
+
+**如果模型不存在，请按照以下步骤添加：**
+
+1. 打开 `backend/management-service/src/main/resources/conf.json` 文件。
+2. 添加以下格式的模型列表：
+```json
+  {
+   "modelName": "one-api 配置的模型名",
+   "name": "前端展示的名字",
+   "maxRequestToken": 4000,
+   "functionCall": false
+}
+```
+3. **保存**更改的文件。
+4. 在项目目录下执行以下命令重新打包：
+
+```shell
+docker build -t samepaage/samepage-api:main -f ./backend/management-service/Dockerfile .
+```
+
+
+
 ### 开始使用
 
 Web 访问地址：http://localhost
