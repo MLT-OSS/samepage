@@ -225,6 +225,7 @@ public interface ConversationBotService {
      * @param keyword               关键词
      * @param pageNo                页码
      * @param pageSize              每页的大小
+     * @param collected             是否收藏，0为收藏，1已收藏
      * @return
      */
     BaseResponse<ConversationInfoVO> listConversation(String botKey,
@@ -232,8 +233,8 @@ public interface ConversationBotService {
                                                       Integer corpId,
                                                       String docId,
                                                       String includeConversationId,
-                                                      String keyword, Integer pageNo, Integer pageSize);
-
+                                                      String keyword, Integer pageNo, Integer pageSize,
+                                                      String collected);
     /**
      * 修改标题
      *

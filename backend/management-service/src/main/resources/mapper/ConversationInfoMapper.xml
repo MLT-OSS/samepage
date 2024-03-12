@@ -95,6 +95,25 @@
         order by create_time desc
         limit 1
     </select>
+    <select id="getConversationInfoThroughCollected" resultMap="BaseResultMap">
+        select
+        `id`,title,create_time,
+        update_time,web_url,model,`description`,
+        type,create_id,
+        last_message_time,is_deleted,doc_id,collected
+        from
+        ${tableName} info
+        where info.is_deleted = false
+        and info.id = #{id}
+        and info.model = #{botKey}
+        and info.create_id = #{userId}
+        <if test="collected != null and collected!=''">
+            and info.collected = #{collected}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and INSTR(info.search_title,#{keyword}) > 0
+        </if>
+    </select>
 
     <select id="listConversation" resultMap="BaseResultMap">
         select
@@ -107,7 +126,8 @@
         i.last_message_time as last_message_time,
         i.is_deleted as is_deleted,
         i.`description` as `description`,
-        i.doc_id as doc_id
+        i.doc_id as doc_id,
+        collected
         from
         ${tableName} i
         where i.is_deleted = false
@@ -117,11 +137,14 @@
             and exists (
             select 1 from ${tableName} info where
             info.id = i.id
-            and INSTR(info.title,#{keyword}) > 0
+            and INSTR(info.search_title,#{keyword}) > 0
             )
         </if>
         <if test="documentId != null">
             and i.doc_id = #{documentId}
+        </if>
+        <if test="collected != null and collected!=''">
+            and i.collected = #{collected}
         </if>
         order by i.last_message_time desc ,i.id desc
     </select>

@@ -288,6 +288,13 @@ public class ConversationInfo implements Serializable {
     private String threadId;
 
 
+
+    /**
+     * 1已收藏，0未收藏，对应Constants.COMMON_YES和Constants.COMMON_NO
+     */
+    private String collected;
+
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 

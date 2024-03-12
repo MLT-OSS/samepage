@@ -439,12 +439,14 @@ public class ConversationBotController {
             @RequestParam(name = "keyword", required = false) String keyword,
             @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
             @RequestParam(name = "currentId", defaultValue = "") String include,
-            @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize
+            @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(name = "collected", required = false) String collected
+
     ) {
         UserContext userContext = UserContextHelper.get();
         return RespBody.ok(conversationInfoService.listConversation(key,
                 userContext.getUserId(), userContext.getTenantId(), docId, include, keyword,
-                Math.max(pageNo, 1), Math.max(pageSize, 1)));
+                Math.max(pageNo, 1), Math.max(pageSize, 1), collected));
     }
 
     @Resource

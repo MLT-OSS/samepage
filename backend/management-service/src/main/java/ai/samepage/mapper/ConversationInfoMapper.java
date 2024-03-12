@@ -245,6 +245,28 @@ public interface ConversationInfoMapper extends BaseMapper<ConversationInfo> {
     List<HashMap<String, Long>> countUserDailySessions(String startTime);
 
 
+
+
+
+    /**
+     * 重载getConversationInfo()方法。getConversationInfo()方法有多处使用，防止对使用场景有影响故新写方法。
+     * @param tableName
+     * @param botKey
+     * @param conversationId
+     * @param userId
+     * @param keyword
+     * @param collected
+     * @return
+     */
+    ConversationInfo getConversationInfoThroughCollected(@Param("tableName") String tableName,
+                                                              @Param("botKey") String botKey,
+                                                              @Param("id") Long conversationId,
+                                                              @Param("userId") Long userId,
+                                                              @Param("keyword") String keyword,
+                                                              @Param("collected") String collected
+    );
+
+
     /**
      * 获取第一个信息
      *
@@ -267,11 +289,12 @@ public interface ConversationInfoMapper extends BaseMapper<ConversationInfo> {
     Long getRecentConversationId(@Param("userId") Long userId, @Param("docId") Long docId);
 
     Page<ConversationInfo> listConversation(Page<ConversationInfo> page,
-                                            @Param("tableName") String tableName,
-                                            @Param("botKey") String botKey,
-                                            @Param("keyword") String keyword,
-                                            @Param("documentId") Long documentId,
-                                            @Param("userId") Long userId);
+                                                 @Param("tableName") String tableName,
+                                                 @Param("botKey") String botKey,
+                                                 @Param("keyword") String keyword,
+                                                 @Param("documentId") Long documentId,
+                                                 @Param("userId") Long userId,
+                                                 @Param("collected") String collected);
 
     void updateTitle(@Param("tableName") String tableName,
                      @Param("botKey") String botKey,

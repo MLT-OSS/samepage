@@ -262,9 +262,9 @@ public class ConversationBotServiceImpl implements ConversationBotService {
                                                              String includeConversationId,
                                                              String keyword,
                                                              Integer pageNo,
-                                                             Integer pageSize) {
-        BotInfo botInfo = botService.selectByKey(botKey, corpId, userId);
-        BotTypeEnum type = botInfo.getType();
+                                                             Integer pageSize, String collected) {
+        BotInfo xmingBot = botService.selectByKey(botKey, corpId, userId);
+        BotTypeEnum type = xmingBot.getType();
         Long documentId = null;
         if (StrUtil.isNotBlank(docId)) {
             documentId = Long.parseLong(docId);
@@ -274,14 +274,15 @@ public class ConversationBotServiceImpl implements ConversationBotService {
             id = Long.parseLong(includeConversationId);
         }
         Page<ConversationInfo> page = new Page<>(pageNo, pageSize, true);
-        page = conversationInfoMapper.listConversation(page,
-                type.getConversationTable(), botInfo.getKey(), keyword, documentId, userId);
+        page = convInfoMapper.listConversation(page,
+                type.getConversationTable(), xmingBot.getKey(), keyword, documentId, userId, collected);
         List<ConversationInfo> records = page.getRecords();
         BaseResponse<ConversationInfoVO> response = new BaseResponse<>();
         response.setPageNo(pageNo);
         response.setTotal((int) page.getTotal());
         List<ConversationInfoVO> res = Lists.newArrayList();
         LocalDateTime now = LocalDateTime.now();
+        // 如果是当前会话则置顶
         if (Objects.nonNull(id) && pageNo == 1) {
             ConversationInfo info = null;
             for (ConversationInfo record : records) {
@@ -294,8 +295,8 @@ public class ConversationBotServiceImpl implements ConversationBotService {
                 records.remove(info);
             } else {
                 info = conversationInfoMapper
-                        .getConversationInfo(type.getConversationTable(),
-                                botKey, id, userId, keyword);
+                        .getConversationInfoThroughCollected(type.getConversationTable(),
+                                xmingBot.getKey(), id, userId, keyword, collected);
             }
             if (Objects.nonNull(info)) {
                 records.add(0, info);
