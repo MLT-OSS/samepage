@@ -42,7 +42,7 @@
         <lombok.version>1.18.22</lombok.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <freemarker.version>2.3.31</freemarker.version>
-        <hutool.version>5.7.22</hutool.version>
+        <hutool.version>5.8.12</hutool.version>
         <myexcel.version>3.11.9</myexcel.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <knife4j.version>2.0.9</knife4j.version>
@@ -158,7 +158,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>31.0.1-jre</version>
+            <version>32.0.0-jre</version>
             <scope>compile</scope>
         </dependency>
 
@@ -167,7 +167,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.21</version>
+            <version>1.26.0</version>
         </dependency>
 
         <!-- database -->
